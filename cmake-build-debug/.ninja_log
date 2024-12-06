@@ -1,0 +1,8 @@
+# ninja log v6
+21	88	7551445145533374	CMakeFiles/Proyecto_1.dir/src/Usuarios.cpp.obj	5fc7fa8887a6e2db
+10	90	7551445145423372	CMakeFiles/Proyecto_1.dir/src/AVL.cpp.obj	8f22b608f0751554
+4	599	7551462183586832	CMakeFiles/Proyecto_1.dir/main.cpp.obj	987b3349dda49a69
+7	91	7551445145393355	CMakeFiles/Proyecto_1.dir/src/Activos.cpp.obj	d2295517707ecb8c
+14	92	7551445145463365	CMakeFiles/Proyecto_1.dir/src/ListaUsuarios.cpp.obj	c14828d017436d1
+18	92	7551445145503362	CMakeFiles/Proyecto_1.dir/src/Matriz.cpp.obj	bcb191c5f917d311
+599	682	7551462189536833	Proyecto_1.exe	d381eceafb56a3bf

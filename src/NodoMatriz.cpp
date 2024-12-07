@@ -3,8 +3,8 @@
 //
 #include "../includes/NodoMatriz.h"
 
-NodoMatriz::NodoMatriz(Usuario* usuario)
-    : usuario(usuario), arriba(nullptr), abajo(nullptr), siguiente(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
+NodoMatriz::NodoMatriz(Usuario* usuario, const std::string& cabecera)
+    : usuario(usuario), cabecera(cabecera), arriba(nullptr), abajo(nullptr), siguiente(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
 }
 
 // getters
@@ -36,6 +36,10 @@ NodoMatriz* NodoMatriz::getDerecha() const {
     return derecha;
 }
 
+const std::string& NodoMatriz::getCabecera() const {
+    return cabecera;
+}
+
 // setters
 void NodoMatriz::setUsuario(Usuario* usuario) {
     this->usuario = usuario;
@@ -63,4 +67,8 @@ void NodoMatriz::setIzquierda(NodoMatriz* izquierda) {
 
 void NodoMatriz::setDerecha(NodoMatriz* derecha) {
     this->derecha = derecha;
+}
+
+void NodoMatriz::setCabecera(const std::string& cabecera) {
+    this->cabecera = cabecera;
 }

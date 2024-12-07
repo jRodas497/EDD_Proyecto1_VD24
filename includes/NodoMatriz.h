@@ -10,7 +10,7 @@
 
 class NodoMatriz {
 public:
-    NodoMatriz(Usuario* usuario);
+    NodoMatriz(Usuario* usuario, const std::string& cabecera = "");
 
     // getters
     Usuario* getUsuario() const;
@@ -20,6 +20,7 @@ public:
     NodoMatriz* getAtras() const;
     NodoMatriz* getIzquierda() const;
     NodoMatriz* getDerecha() const;
+    const std::string& getCabecera() const;
 
     // setters
     void setUsuario(Usuario* usuario);
@@ -29,9 +30,11 @@ public:
     void setAtras(NodoMatriz* atras);
     void setIzquierda(NodoMatriz* izquierda);
     void setDerecha(NodoMatriz* derecha);
+    void setCabecera(const std::string& cabecera);
 
 private:
     Usuario* usuario;
+    std::string cabecera;
     NodoMatriz* arriba;
     NodoMatriz* abajo;
     NodoMatriz* siguiente;

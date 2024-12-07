@@ -16,4 +16,7 @@ add_executable(Proyecto_1 main.cpp
         src/Usuario.cpp
         includes/HistorialRenta.h
         includes/GestorDatos.h
-        src/GestorDatos.cpp)
+        src/GestorDatos.cpp
+        src/NodoMatriz.cpp
+        includes/NodoMatriz.h
+        src/HistorialRenta.cpp)

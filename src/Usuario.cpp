@@ -5,8 +5,9 @@
 
 int::Usuario::nextId = 1;
 
+
 Usuario::Usuario(const std::string& nombre, const std::string& usuario, const std::string& contra)
-    : id(nextId++), nombre(nombre), usuario(usuario), contra(contra) {
+    : id(nextId++), nombre(nombre), usuario(usuario), contra(contra), arbolActivos() {
 }
 
 // getters
@@ -26,6 +27,10 @@ const std::string& Usuario::getContra() const {
     return contra;
 }
 
+AVL<Activo>* Usuario::getArbol() {
+    return &arbolActivos;
+}
+
 // setters
 void Usuario::setNombre(const std::string& nombre) {
     this->nombre = nombre;
@@ -37,4 +42,8 @@ void Usuario::setUsuario(const std::string& usuario) {
 
 void Usuario::setContra(const std::string& contra) {
     this->contra = contra;
+}
+
+void Usuario::setArbol(const AVL<Activo>& arbol) {
+    this->arbolActivos = arbol;
 }

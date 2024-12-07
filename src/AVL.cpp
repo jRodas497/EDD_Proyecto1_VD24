@@ -121,7 +121,6 @@ AVL::Nodo* AVL::buscar(Nodo* nodo, const std::string& id) const {
 void AVL::imprimirEnOrden(Nodo* nodo) const {
     if (nodo) {
         imprimirEnOrden(nodo->izquierda);
-        std::cout << "ID: " << nodo->activo->getId() << " | Nombre: " << nodo->activo->getName() << " | Descripción: " << nodo->activo->getDescription() << " | ID Alfanumérico: " << nodo->activo->getIdAlfa() << std::endl;
         imprimirEnOrden(nodo->derecha);
     }
 }

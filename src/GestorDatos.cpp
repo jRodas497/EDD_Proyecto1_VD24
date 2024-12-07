@@ -3,12 +3,11 @@
 //
 #include "../includes/GestorDatos.h"
 #include <iostream>
-
+/*
 GestorDatos::GestorDatos() {}
 
 void GestorDatos::agregarActivo(const std::string& nombre, const std::string& descripcion, const std::string& idAlfa) {
     Activo* nuevoActivo = new Activo(idCounter++, nombre, descripcion, idAlfa);
-    arbolActivos.insertar(nuevoActivo);
 }
 
 void GestorDatos::eliminarActivo(int id) {
@@ -27,3 +26,4 @@ void GestorDatos::mostrarActivos() const {
 bool GestorDatos::existeActivo(int id) const {
     return arbolActivos.buscar(std::to_string(id)) != nullptr;
 }
+*/

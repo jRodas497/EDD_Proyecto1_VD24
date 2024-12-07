@@ -3,9 +3,13 @@
 //
 #include "../includes/Activo.h"
 
-Activo::Activo(int id, const std::string& nombre, const std::string& descripcion, const std::string& idAlfa)
-    : id(id), nombre(nombre), descripcion(descripcion), idAlfa(idAlfa), rentado(false), eliminado(false) {}
+int::Activo::nextId = 1;
 
+Activo::Activo(const std::string& nombre, const std::string& descripcion, const std::string& idAlfa)
+    : id(nextId++), nombre(nombre), descripcion(descripcion), idAlfa(idAlfa), rentado(false), eliminado(false) {
+}
+
+// getters
 int Activo::getId() const {
     return id;
 }
@@ -14,38 +18,39 @@ const std::string& Activo::getIdAlfa() const {
     return idAlfa;
 }
 
-const std::string& Activo::getName() const {
+const std::string& Activo::getNombre() const {
     return nombre;
 }
 
-const std::string& Activo::getDescription() const {
+const std::string& Activo::getDescripcion() const {
     return descripcion;
 }
 
+bool Activo::isRentado() const {
+    return rentado;
+}
+
+bool Activo::isEliminado() const {
+    return eliminado;
+}
+
+// setters
 void Activo::setIdAlfa(const std::string& idAlfa) {
     this->idAlfa = idAlfa;
 }
 
-void Activo::setName(const std::string& nombre) {
+void Activo::setNombre(const std::string& nombre) {
     this->nombre = nombre;
 }
 
-void Activo::setDescription(const std::string& descripcion) {
+void Activo::setDescripcion(const std::string& descripcion) {
     this->descripcion = descripcion;
 }
 
-bool Activo::isRented() const {
-    return rentado;
-}
-
-void Activo::setRented(bool rentado) {
+void Activo::setRentado(bool rentado) {
     this->rentado = rentado;
 }
 
-bool Activo::isDeleted() const {
-    return eliminado;
-}
-
-void Activo::setDeleted(bool eliminado) {
+void Activo::setEliminado(bool eliminado) {
     this->eliminado = eliminado;
 }

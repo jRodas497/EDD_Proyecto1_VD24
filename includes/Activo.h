@@ -5,20 +5,23 @@
 
 class Activo {
 public:
-    Activo(int id, const std::string& nombre, const std::string& descripcion, const std::string& idAlfa);
+    Activo(const std::string& nombre, const std::string& descripcion, const std::string& idAlfa);
+    // getters
     int getId() const;
     const std::string& getIdAlfa() const;
-    const std::string& getName() const;
-    const std::string& getDescription() const;
-    void setName(const std::string& nombre);
-    void setDescription(const std::string& descripcion);
+    const std::string& getNombre() const;
+    const std::string& getDescripcion() const;
+    bool isRentado() const;
+    bool isEliminado() const;
+    // setters
     void setIdAlfa(const std::string& idAlfa);
-    bool isRented() const;
-    void setRented(bool rentado);
-    bool isDeleted() const;
-    void setDeleted(bool eliminado);
+    void setNombre(const std::string& nombre);
+    void setDescripcion(const std::string& descripcion);
+    void setRentado(bool rentado);
+    void setEliminado(bool eliminado);
 
 private:
+    static int nextId;
     int id;
     std::string idAlfa;
     std::string nombre;

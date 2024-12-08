@@ -47,7 +47,7 @@ void agregarActivo() {
     std::cout << ">> Ingresar Descripcion...: ";
     std::cin >> descripcion;
 
-    Activo* nuevoActivo = new Activo(nombre, descripcion, idAlfa);
+    //Activo* nuevoActivo = new Activo(nombre, descripcion, idAlfa);
     //arbolActivos.insertar(nuevoActivo);
     std::cout << "Nombre: " << nombre << " | Descripcion: " << descripcion << " | ID(15): " << idAlfa << "\n" << std::endl;
 }

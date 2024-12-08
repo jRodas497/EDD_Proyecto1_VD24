@@ -4,25 +4,23 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
-#include "ListaUsuario.h"
-
-struct NodoMatrizDispersa {
-    int fila;
-    int columna;
-    ListaUsuario listaUsuarios;
-    NodoMatrizDispersa* siguiente;
-};
+#include "NodoMatriz.h"
 
 class MatrizDispersa {
 public:
-    MatrizDispersa(int filas, int columnas);
-    void insertar(int fila, int columna, Usuario* usuario, bool alFinal);
-    void imprimirMatriz();
+    MatrizDispersa();
+    NodoMatriz* insertarCabHorizontal(const std::string& depto);
+    NodoMatriz* insertarCabVertical(const std::string& company);
+    void insertarUsuario(Usuario* usuario, const std::string& depto, const std::string& company);
+    NodoMatriz* deptoExiste(const std::string& depto);
+    NodoMatriz* companyExiste(const std::string& company);
+
+
 
 private:
-    int filas;
-    int columnas;
-    NodoMatrizDispersa* cabeza;
+    NodoMatriz* inicial;
+    NodoMatriz* cabeceraH;
+    NodoMatriz* cabeceraV;
 };
 
 #endif // MATRIZ_H

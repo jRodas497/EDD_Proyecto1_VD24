@@ -260,14 +260,13 @@ void menuAdmin() {
                 std::cout << "\nPor favor escoja una de las opciones disponibles...\n";
         }
     }
-
 }
 
 void login() {
     std::string usuario, contra, depto, company;
 
     std::cout << "\n>> %%%%%%%%%%%%%%%%%%%%%%%%%%% Renta de Activos %%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
-    std::cout << ">> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Login %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" << std::endl;
+    std::cout <<   ">> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Login %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" << std::endl;
 
     std::cout << ">> Ingresar Usuario... " << std::endl;
     std::cin >> usuario;
@@ -290,8 +289,15 @@ void login() {
         //volver en minus para no tener IGSS/igss/Igss/iGsS
         std::transform(company.begin(), company.end(), company.begin(), ::tolower);
 
+
+
+
         //comprobación de si el usuario existe en la base de datos con if
         menuUsuario(usuario);
+
+
+
+
     }
 }
 

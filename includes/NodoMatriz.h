@@ -10,7 +10,8 @@
 
 class NodoMatriz {
 public:
-    NodoMatriz(Usuario* usuario, const std::string& cabecera = "");
+    NodoMatriz(Usuario* usuario);
+    NodoMatriz(const std::string& cabecera);
 
     // getters
     Usuario* getUsuario() const;
@@ -44,3 +45,24 @@ private:
 };
 
 #endif // NODOMATRIZ_H
+
+/*
+// Crear un nodo matriz de cabecera con un valor para la cabecera y sin usuario
+NodoMatriz* nodoCabecera = new NodoMatriz(nullptr, "NombreDeLaCabecera");
+
+// Crear un usuario
+Usuario* usuario = new Usuario("nombre", "usuario", "contra");
+
+// Crear un nodo matriz con el usuario y una cabecera vacía
+NodoMatriz* nodoUsuario = new NodoMatriz(usuario, "");
+*/
+
+
+// Crear un usuario
+Usuario* usuario = new Usuario("nombre", "usuario", "contra");
+
+// Crear un nodo matriz con el usuario y una cabecera vacía
+NodoMatriz* nodoUsuario = new NodoMatriz(usuario);
+
+// Crear un nodo matriz de cabecera con un valor para la cabecera y sin usuario
+NodoMatriz* nodoCabecera = new NodoMatriz("NombreDeLaCabecera");

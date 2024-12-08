@@ -49,7 +49,7 @@ void agregarActivo() {
 
     //Activo* nuevoActivo = new Activo(nombre, descripcion, idAlfa);
     //arbolActivos.insertar(nuevoActivo);
-    std::cout << "Nombre: " << nombre << " | Descripcion: " << descripcion << " | ID(15): " << idAlfa << "\n" << std::endl;
+    std::cout << "Nombre: " << nombre << " | Descripcion: " << descripcion << " | ID(15): " << idAlfa  << std::endl;
 }
 
 void eliminarActivo() {
@@ -124,6 +124,7 @@ void menuUsuario(const std::string& user) {
             case 7:
                 std::cout << "Adios " << user << " nos vemos!" << std::endl;
                 menu = false;
+                break;
             default:
                 std::cout << "\nPor favor escoja una de las opciones disponibles...\n";
         }

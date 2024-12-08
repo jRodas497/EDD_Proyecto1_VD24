@@ -19,7 +19,7 @@ public:
     NodoMatriz* deptoBuscar(const std::string& depto);
     NodoMatriz* companyBuscar(const std::string& company);
     NodoMatriz* existeEn(NodoMatriz* cabezaDepto, const std::string& company);
-    bool existeUsuario(NodoMatriz* nodoUser, const std::string& usuario);
+    bool existenUsuarios(NodoMatriz* nodoUser, const std::string& usuario);
 
     // Funciones de inserción de Usuarios
     void insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* companyNodo);

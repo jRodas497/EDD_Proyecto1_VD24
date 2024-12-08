@@ -127,38 +127,52 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
     NodoMatriz* deptoNodo = deptoBuscar(depto);
     NodoMatriz* companyNodo = companyBuscar(company);
 
-    // Si no existe la cabecera horizontal ni la vertical
+    // Caso 1: Si no existe el depto ni la company, se crean
     if (deptoNodo == nullptr && companyNodo == nullptr) {
-        // si no existe el depto lo crea
-        if (!deptoNodo) {
-            deptoNodo = insertarCabHorizontal(depto);
-        }
+        deptoNodo = insertarCabHorizontal(depto);
+        companyNodo = insertarCabVertical(company);
 
-        // si no existe la company la crea
-        if (!companyNodo) {
-            companyNodo = insertarCabVertical(company);
-        }
-
-        // Se inserta al final de la matriz
         insertarFinal(usuario, deptoNodo, companyNodo);
+    }
+    // Caso 2: Si no existe el depto pero si la company(de ultimo)
+    else if (deptoNodo == nullptr && companyNodo->getAbajo() == nullptr) {
+        deptoNodo = insertarCabHorizontal(depto);
 
-    //Si los siguientes nodos son los ultimos de la matriz (ya hay nodos de depto y company)
-    } else if (deptoNodo->getDerecha() == nullptr || companyNodo->getDerecha() == nullptr) {
-        NodoMatriz* nodoUser = existeEn(deptoNodo, company);
+        insertarFinal(usuario, deptoNodo, companyNodo);
+    }
+    // Caso3: Si existe el depto (de ultimo) pero no la company
+    else if (deptoNodo->getDerecha() == nullptr && companyNodo == nullptr) {
+        companyNodo = insertarCabVertical(company);
 
-        if(deptoNodo->getDerecha() == nullptr && companyNodo->getAbajo() == nullptr){
-            if (existeUsuario(nodoUser, usuarioNuevo->getUsuario())) {}
+        insertarFinal(usuario, deptoNodo, companyNodo);
+    }
 
-            if (nodoUser != nullptr) {
 
-            } else {
-                insertarFinal(usuario, deptoNodo, companyNodo);
-            }
-        }
+
+
+    // Caso 4: Si ya existen ambos nodos al final se inserta el usuario
+    else if (deptoNodo->getDerecha() == nullptr && companyNodo->getAbajo() == nullptr) {
+        insertarFinal(usuario, deptoNodo, companyNodo);
+    }
+
+
+
+
+    // caso 5: Company en medio y depto al final
+    else if (deptoNodo->getDerecha() == nullptr && companyNodo->getAbajo() != nullptr) {
+
+    }
+    // caso 6: Depto en medio y company al final
+    else if (deptoNodo->getDerecha() != nullptr && companyNodo->getAbajo() == nullptr) {
+
+    }
+    // caso 7: Depto y company en medio
+    else if (deptoNodo->getDerecha() != nullptr && companyNodo->getAbajo() != nullptr) {
+
     }
 }
 // Comprueba si el usuario ya existe en esa posición [Depto x Company]
-bool Matriz::existeUsuario(NodoMatriz* nodoUser, const std::string& usuario) {
+bool Matriz::existenUsuarios(NodoMatriz* nodoUser, const std::string& usuario) {
     NodoMatriz* aux = nodoUser;
 
     while (aux->getAtras() != nullptr) {
@@ -182,16 +196,21 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
         auxDepto = auxDepto->getDerecha();
     }
 
-    // hace la conexión entre el último depto y el usuario
-    auxDepto->setDerecha(nuevoUsuario);
-    nuevoUsuario->setIzquierda(auxDepto);
-
     // recorre hasta el final de la company
     while (auxCompany->getAbajo()) {
         auxCompany = auxCompany->getAbajo();
     }
 
+    // verifica si ya existe un nodo en la posición [Depto x Company]
+    if (auxDepto->getAbajo() == auxCompany->getDerecha()) {
+        return;
+    }
+
+    // hace la conexión entre el último depto y el usuario
+    auxDepto->setAbajo(nuevoUsuario);
+    nuevoUsuario->setArriba(auxDepto);
+
     // hace la conexión entre el último usuario y el usuario
-    auxCompany->setAbajo(nuevoUsuario);
-    nuevoUsuario->setArriba(auxCompany);
+    auxCompany->setDerecha(nuevoUsuario);
+    nuevoUsuario->setIzquierda(auxCompany);
 }

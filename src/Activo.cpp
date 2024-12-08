@@ -10,27 +10,27 @@ Activo::Activo(const std::string& nombre, const std::string& descripcion, const 
 }
 
 // getters
-int Activo::getId() const {
+int Activo::getId() {
     return id;
 }
 
-const std::string& Activo::getIdAlfa() const {
+const std::string& Activo::getIdAlfa() {
     return idAlfa;
 }
 
-const std::string& Activo::getNombre() const {
+const std::string& Activo::getNombre() {
     return nombre;
 }
 
-const std::string& Activo::getDescripcion() const {
+const std::string& Activo::getDescripcion() {
     return descripcion;
 }
 
-bool Activo::isRentado() const {
+bool Activo::isRentado() {
     return rentado;
 }
 
-bool Activo::isEliminado() const {
+bool Activo::isEliminado() {
     return eliminado;
 }
 

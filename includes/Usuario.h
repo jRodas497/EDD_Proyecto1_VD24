@@ -10,18 +10,18 @@
 
 class Usuario {
 public:
-    Usuario(const std::string& nombre, const std::string& usuario, const std::string& contra);
+    Usuario(const std::string& nombre, const std::string& usuario, const std::string& contra, const AVL* arbolActivos);
     // getters
-    int getId() const;
-    const std::string& getNombre() const;
-    const std::string& getUsuario() const;
-    const std::string& getContra() const;
-    AVL<Activo>& getArbol();
+    int getId();
+    const std::string& getNombre();
+    const std::string& getUsuario();
+    const std::string& getContra();
+    AVL* getArbol();
     // setters
     void setNombre(const std::string& nombre);
     void setUsuario(const std::string& usuario);
     void setContra(const std::string& contra);
-    void setArbol(const AVL<Activo>& arbol);
+    void setArbol(AVL* arbolActivos);
 
 private:
     static int nextId;
@@ -29,7 +29,7 @@ private:
     std::string nombre;
     std::string usuario;
     std::string contra;
-    AVL<Activo> arbolActivos;
+    AVL* arbolActivos;
 };
 
 #endif // USUARIO_H

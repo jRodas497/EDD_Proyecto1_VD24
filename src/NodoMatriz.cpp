@@ -4,43 +4,43 @@
 #include "../includes/NodoMatriz.h"
 
 NodoMatriz::NodoMatriz(Usuario* usuario)
-    : usuario(usuario), cabecera(""), arriba(nullptr), abajo(nullptr), siguiente(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
+    : usuario(usuario), cabecera(""), arriba(nullptr), abajo(nullptr), delante(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
 }
 
 NodoMatriz::NodoMatriz(const std::string& cabecera)
-    : usuario(nullptr), cabecera(cabecera), arriba(nullptr), abajo(nullptr), siguiente(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
+    : usuario(nullptr), cabecera(cabecera), arriba(nullptr), abajo(nullptr), delante(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
 }
 
 // getters
-Usuario* NodoMatriz::getUsuario() const {
+Usuario* NodoMatriz::getUsuario() {
     return usuario;
 }
 
-NodoMatriz* NodoMatriz::getArriba() const {
+NodoMatriz* NodoMatriz::getArriba() {
     return arriba;
 }
 
-NodoMatriz* NodoMatriz::getAbajo() const {
+NodoMatriz* NodoMatriz::getAbajo() {
     return abajo;
 }
 
-NodoMatriz* NodoMatriz::getSiguiente() const {
-    return siguiente;
+NodoMatriz* NodoMatriz::getDelante() {
+    return delante;
 }
 
-NodoMatriz* NodoMatriz::getAtras() const {
+NodoMatriz* NodoMatriz::getAtras() {
     return atras;
 }
 
-NodoMatriz* NodoMatriz::getIzquierda() const {
+NodoMatriz* NodoMatriz::getIzquierda() {
     return izquierda;
 }
 
-NodoMatriz* NodoMatriz::getDerecha() const {
+NodoMatriz* NodoMatriz::getDerecha() {
     return derecha;
 }
 
-const std::string& NodoMatriz::getCabecera() const {
+const std::string& NodoMatriz::getCabecera() {
     return cabecera;
 }
 
@@ -57,8 +57,8 @@ void NodoMatriz::setAbajo(NodoMatriz* abajo) {
     this->abajo = abajo;
 }
 
-void NodoMatriz::setSiguiente(NodoMatriz* siguiente) {
-    this->siguiente = siguiente;
+void NodoMatriz::setDelante(NodoMatriz* delante) {
+    this->delante = delante;
 }
 
 void NodoMatriz::setAtras(NodoMatriz* atras) {

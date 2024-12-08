@@ -7,12 +7,12 @@ class Activo {
 public:
     Activo(const std::string& nombre, const std::string& descripcion, const std::string& idAlfa);
     // getters
-    int getId() const;
-    const std::string& getIdAlfa() const;
-    const std::string& getNombre() const;
-    const std::string& getDescripcion() const;
-    bool isRentado() const;
-    bool isEliminado() const;
+    int getId();
+    const std::string& getIdAlfa();
+    const std::string& getNombre();
+    const std::string& getDescripcion();
+    bool isRentado();
+    bool isEliminado();
     // setters
     void setIdAlfa(const std::string& idAlfa);
     void setNombre(const std::string& nombre);

@@ -14,20 +14,20 @@ public:
     NodoMatriz(const std::string& cabecera);
 
     // getters
-    Usuario* getUsuario() const;
-    NodoMatriz* getArriba() const;
-    NodoMatriz* getAbajo() const;
-    NodoMatriz* getSiguiente() const;
-    NodoMatriz* getAtras() const;
-    NodoMatriz* getIzquierda() const;
-    NodoMatriz* getDerecha() const;
-    const std::string& getCabecera() const;
+    Usuario* getUsuario();
+    NodoMatriz* getArriba();
+    NodoMatriz* getAbajo();
+    NodoMatriz* getDelante();
+    NodoMatriz* getAtras();
+    NodoMatriz* getIzquierda();
+    NodoMatriz* getDerecha();
+    const std::string& getCabecera();
 
     // setters
     void setUsuario(Usuario* usuario);
     void setArriba(NodoMatriz* arriba);
     void setAbajo(NodoMatriz* abajo);
-    void setSiguiente(NodoMatriz* siguiente);
+    void setDelante(NodoMatriz* siguiente);
     void setAtras(NodoMatriz* atras);
     void setIzquierda(NodoMatriz* izquierda);
     void setDerecha(NodoMatriz* derecha);
@@ -36,12 +36,12 @@ public:
 private:
     Usuario* usuario;
     std::string cabecera;
-    NodoMatriz* arriba;
-    NodoMatriz* abajo;
-    NodoMatriz* siguiente;
-    NodoMatriz* atras;
-    NodoMatriz* izquierda;
-    NodoMatriz* derecha;
+    NodoMatriz* arriba; // company
+    NodoMatriz* abajo; // company
+    NodoMatriz* delante; //usuario
+    NodoMatriz* atras; //usuario
+    NodoMatriz* izquierda; // depto
+    NodoMatriz* derecha; // depto
 };
 
 #endif // NODOMATRIZ_H

@@ -19,11 +19,13 @@ public:
     NodoMatriz* deptoBuscar(const std::string& depto);
     NodoMatriz* companyBuscar(const std::string& company);
     NodoMatriz* existeEn(NodoMatriz* cabezaDepto, const std::string& company);
+    NodoMatriz* deptoUltimo(const std::string& depto);
+    NodoMatriz* companyUltimo(const std::string& depto);
     bool existenUsuarios(NodoMatriz* nodoUser, const std::string& usuario);
 
     // Funciones de inserción de Usuarios
-    void insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* companyNodo);
-    void insertarUsuario(Usuario* usuario, const std::string& depto, const std::string& company);
+    void insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* companyNodo, bool insertarAtras);
+    void insertarUsuario(Usuario* usuario, const std::string& depto, const std::string& company, bool insertarAtras);
 private:
     NodoMatriz* inicial;
     NodoMatriz* cabeceraH;

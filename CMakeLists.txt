@@ -3,4 +3,16 @@ project(EDD)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(EDD main.cpp)
+include_directories(includes)
+
+set(SOURCES
+        main.cpp
+        src/Usuario.cpp
+        src/Matriz.cpp
+        src/NodoMatriz.cpp
+        src/Activo.cpp
+        src/AVL.cpp
+)
+
+# Add executable
+add_executable(EDD ${SOURCES})

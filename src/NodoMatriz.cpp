@@ -3,6 +3,10 @@
 //
 #include "../includes/NodoMatriz.h"
 
+Usuario* usuario = nullptr;
+NodoMatriz* nodoUsuario = nullptr;
+NodoMatriz* nodoCabecera = nullptr;
+
 NodoMatriz::NodoMatriz(Usuario* usuario)
     : usuario(usuario), cabecera(""), arriba(nullptr), abajo(nullptr), delante(nullptr), atras(nullptr), izquierda(nullptr), derecha(nullptr) {
 }

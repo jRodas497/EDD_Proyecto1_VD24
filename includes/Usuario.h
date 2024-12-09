@@ -10,7 +10,7 @@
 
 class Usuario {
 public:
-    Usuario(const std::string& nombre, const std::string& usuario, const std::string& contra, const AVL* arbolActivos);
+    Usuario(const std::string& nombre, const std::string& usuario, const std::string& contra);
     // getters
     int getId();
     const std::string& getNombre();

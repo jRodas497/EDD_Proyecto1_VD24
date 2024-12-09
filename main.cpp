@@ -9,6 +9,11 @@
 #include <random>
 #include "includes/Activo.h"
 #include "includes/AVL.h"
+#include "includes/Usuario.h"
+#include "includes/Matriz.h"
+
+// Inicializar datos
+Matriz* matriz = new Matriz();
 
 bool obtenerOpcion(int& opcion) {
     std::cin >> opcion;
@@ -143,8 +148,8 @@ void registrarUsuario() {
     std::cout << ">> Ingresar Password...: ";
     std::cin >> contra;
 
-    //Usuario* nuevoUsuario = new Usuario(nombre, usuario, contra);
-    //arbolUsuarios.insertar(nuevoUsuario);
+    Matriz* matriz = new Matriz();
+
     std::cout << "\nNombre: " << nombre << " | Usuario: " << usuario << " | Password: " << contra << std::endl;
 }
 
@@ -303,6 +308,35 @@ void login() {
 }
 
 int main () {
+    /*
+    Usuario* usuario_01 = new Usuario("Juan Rodas", "jrodas", "1234");
+    matriz->insertarUsuario(usuario_01, "Guatemala", "USAC");
+    */
+
+    // Usuarios con diferentes departamentos y empresas
+    matriz->insertarUsuario(new Usuario("Juan Rodas", "jrodas", "1234"), "Guatemala", "USAC");
+    matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "Guatemala", "USAC");
+    matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "Jutiapa", "Irtra");
+    matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "JRB", "Tststo");
+    matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "Peten", "BigMc");
+    matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "San Marcos", "Max");
+    matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "Quetzaltenango", "Burger King");
+    matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "Quiche", "KFC");
+    matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "Jalapa", "YHLQMDLG");
+    matriz->insertarUsuario(new Usuario("Eva Davis", "edavis", "pass5"), "Santa Rosa", "Twitch");
+
+    // Usuarios con el mismo departamento y empresa
+    matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "Alta Verapaz", "YouTube");
+    matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "Izabal", "YouTube");
+
+    // Usuarios con el mismo departamento pero diferente empresa
+    matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "Baja Verapaz", "TikTok");
+    matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "Baja Verapaz", "No se");
+
+    // One more user with unique department and company
+    matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "Dept8", "Company8");
+
+
     int opcion = 0;
 
     std::cout << "\n>> [1]. Login [ADMIN]/[USUARIO]" << std::endl;

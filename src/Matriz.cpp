@@ -123,7 +123,7 @@ NodoMatriz *Matriz::buscarCabeceraHorizontal(NodoMatriz *nodoUser) {
 void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, const std::string& company) {
     NodoMatriz* nuevo = new NodoMatriz(usuario);
 
-    // Devuelve el nodo del depto y la company si ya existen
+    // Devuelve el nodo del depto y la company si ya existen, si no, devuelve nullptr
     NodoMatriz* deptoNodo = deptoBuscar(depto);
     NodoMatriz* companyNodo = companyBuscar(company);
 
@@ -146,11 +146,7 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
 
         insertarFinal(usuario, deptoNodo, companyNodo);
     }
-
-
-
-
-    // Caso 4: Si ya existen ambos nodos al final se inserta el usuario
+    // Caso 4: Si ya existen ambos (depto y company) al final se inserta el usuario detras/adelante del(los) usuario/s existente/s
     else if (deptoNodo->getDerecha() == nullptr && companyNodo->getAbajo() == nullptr) {
         insertarFinal(usuario, deptoNodo, companyNodo);
     }
@@ -191,19 +187,54 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
     NodoMatriz* auxDepto = deptoNodo;
     NodoMatriz* auxCompany = companyNodo;
 
+
+    // ya se está al final de la cabecera horizontal, borrar más adelante
     // recorre hasta el final del depto
     while (auxDepto->getDerecha()) {
         auxDepto = auxDepto->getDerecha();
     }
-
+	// ya se está al final de la cabecera vertical, borrar más adelante
     // recorre hasta el final de la company
     while (auxCompany->getAbajo()) {
         auxCompany = auxCompany->getAbajo();
     }
 
+
+    // Llega hasta el usuario más abajo del ultimo depto
+    while (auxDepto->getAbajo()) {
+        auxDepto = auxDepto->getAbajo();
+    }
+
+    // Llega hasta el usuario más a la derecha de la última company
+    while (auxCompany->getDerecha()) {
+        auxCompany = auxCompany->getDerecha();
+    }
+
     // verifica si ya existe un nodo en la posición [Depto x Company]
-    if (auxDepto->getAbajo() == auxCompany->getDerecha()) {
-        return;
+    if (auxDepto == auxCompany) {
+        char posicion;
+    	std::cout << "¿Desea insertar al final [f] o al inicio [i] del usuario existente?: ";
+    	std::cin >> posicion;
+
+        if (posicion == 'f') {
+        	// recorre hasta el final de la lista de usuarios en la posición [Depto x Company]
+        	NodoMatriz* ultimoUsuario = auxDepto; // ó auxCompany
+        	while (ultimoUsuario->getAtras() != nullptr) {
+            	ultimoUsuario = ultimoUsuario->getAtras();
+        }
+        	// agrega el nuevo usuario detrás del último usuario
+        	ultimoUsuario->setAtras(nuevoUsuario);
+        	nuevoUsuario->setDelante(ultimoUsuario);
+    	} else if (posicion == 'i') {
+        // agrega el nuevo usuario delante del primer usuario
+        	NodoMatriz* primerUsuario = auxDepto; // ó auxCompany
+
+        	nuevoUsuario->setAtras(primerUsuario);
+        	primerUsuario->setDelante(nuevoUsuario);
+        	auxDepto->setAbajo(nuevoUsuario);
+        	nuevoUsuario->setArriba(auxDepto);
+    	}
+    return;
     }
 
     // hace la conexión entre el último depto y el usuario
@@ -214,3 +245,55 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
     auxCompany->setDerecha(nuevoUsuario);
     nuevoUsuario->setIzquierda(auxCompany);
 }
+/*
+// verifica si ya existe un nodo en la posición [Depto x Company]
+if (auxCompany->getIzquierda() == auxDepto->getAbajo()) {
+    // recorre hasta el final de la lista de usuarios en la posición [Depto x Company]
+    NodoMatriz* ultimoUsuario = auxCompany->getIzquierda();
+    while (ultimoUsuario->getAtras() != nullptr) {
+        ultimoUsuario = ultimoUsuario->getAtras();
+    }
+    // agrega el nuevo usuario detrás del último usuario
+    ultimoUsuario->setAtras(nuevoUsuario);
+    nuevoUsuario->setDelante(ultimoUsuario);
+    return;
+}
+*/
+
+/*
+// recorre hasta el final de la lista de usuarios en la posición [Depto x Company]
+        NodoMatriz* ultimoUsuario = auxDepto->getAbajo();
+        while (ultimoUsuario->getAtras() != nullptr) {
+            ultimoUsuario = ultimoUsuario->getAtras();
+        }
+        // agrega el nuevo usuario detrás del último usuario
+        ultimoUsuario->setAtras(nuevoUsuario);
+        nuevoUsuario->setDelante(ultimoUsuario);
+        return;
+*/
+/*
+if (auxDepto == auxCompany) {
+    char posicion;
+    std::cout << "¿Desea insertar al final (f) o al inicio (i) del usuario existente? ";
+    std::cin >> posicion;
+
+    if (posicion == 'f') {
+        // recorre hasta el final de la lista de usuarios en la posición [Depto x Company]
+        NodoMatriz* ultimoUsuario = auxDepto->getAbajo();
+        while (ultimoUsuario->getAtras() != nullptr) {
+            ultimoUsuario = ultimoUsuario->getAtras();
+        }
+        // agrega el nuevo usuario detrás del último usuario
+        ultimoUsuario->setAtras(nuevoUsuario);
+        nuevoUsuario->setDelante(ultimoUsuario);
+    } else if (posicion == 'i') {
+        // agrega el nuevo usuario delante del primer usuario
+        NodoMatriz* primerUsuario = auxDepto->getAbajo();
+        nuevoUsuario->setAtras(primerUsuario);
+        primerUsuario->setDelante(nuevoUsuario);
+        auxDepto->setAbajo(nuevoUsuario);
+        nuevoUsuario->setArriba(auxDepto);
+    }
+    return;
+}
+*/

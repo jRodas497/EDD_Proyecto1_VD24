@@ -13,7 +13,10 @@
 #include "includes/Matriz.h"
 
 // Inicializar datos
+NodoMatriz* usuarioLogueado = nullptr;
+
 Matriz* matriz = new Matriz();
+void mainMenu();
 
 bool obtenerOpcion(int& opcion) {
     std::cin >> opcion;
@@ -40,7 +43,9 @@ std::string randomID() {
 }
 
 /*
- [[[[[[[[[      FUNCIONES DE MENU USUARIO      ]]]]]]]]]
+ ===================================================================================================================
+ [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[     FUNCIONES DE MENU USUARIO      ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+ ===================================================================================================================
  */
 
 void agregarActivo() {
@@ -96,7 +101,7 @@ void menuUsuario(const std::string& user) {
     int opcion;
 
     while (menu) {
-        std::cout << "\n>> ==================== " << user << " ====================" << std::endl;
+        std::cout << ">> ==================== " << user << " ====================" << std::endl;
         std::cout << ">> ### [1]. Agregar Activo" << std::endl;
         std::cout << ">> ### [2]. Eliminar Activo" << std::endl;
         std::cout << ">> ### [3]. Modificar Activo" << std::endl;
@@ -137,7 +142,9 @@ void menuUsuario(const std::string& user) {
 }
 
 /*
- [[[[[[[[[      FUNCIONES DE MENU ADMINISTRADOR      ]]]]]]]]]
+ ===================================================================================================================
+ [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[      FUNCIONES DE MENU ADMINISTRADOR      ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+ ===================================================================================================================
  */
 void registrarUsuario() {
     char opcion;
@@ -158,10 +165,10 @@ void registrarUsuario() {
     std::cin >> opcion;
 
     if (opcion == 'f') {
-        matriz->insertarUsuario(new Usuario(nombre, usuario, contra), depto, company, false);
+        matriz->insertarUsuario(new Usuario(nombre, usuario, contra), depto, company, true);
         std::cout << "\nNombre: " << nombre << " | Usuario: " << usuario << " | Password: " << contra << " | Depto: " << depto << " | Company: " << company << "\n" << std::endl;
     } else if (opcion == 'i') {
-        matriz->insertarUsuario(new Usuario(nombre, usuario, contra), depto, company, true);
+        matriz->insertarUsuario(new Usuario(nombre, usuario, contra), depto, company, false);
         std::cout << "\nNombre: " << nombre << " | Usuario: " << usuario << " | Password: " << contra << " | Depto: " << depto << " | Company: " << company << "\n" << std::endl;
     } else {
         std::cout << "Por favor ingrese una opcion valida..." << std::endl;
@@ -172,6 +179,7 @@ void registrarUsuario() {
 void reporteMatrizDispersa() {
     //matrizDispersa.reporte();
     std::cout << "\n>> Reporte de la Matriz Dispersa [Departamentos x Empresas] generado! \n";
+    system("pause");
 }
 
 void reporteActivosDisponiblesDepto() {
@@ -235,7 +243,7 @@ void menuAdmin() {
     int opcion;
 
     while (menu) {
-        std::cout << "\n>> ====================   SEA BIENVENIDO ADMIN   ====================" << std::endl;
+        std::cout << ">> ====================   SEA BIENVENIDO ADMIN   ====================" << std::endl;
         std::cout <<   ">> %%% [1]. Registrar Usuario  " << std::endl;
         std::cout <<   ">> %%% [2]. Reporte (Graphviz) Matriz Dispersa  " << std::endl;
         std::cout <<   ">> %%% [3]. Reporte (Graphviz) Activos Disponibles de un Departamento  " << std::endl;
@@ -294,49 +302,58 @@ void login() {
     std::cin >> usuario;
     std::transform(usuario.begin(), usuario.end(), usuario.begin(), ::tolower);
 
-    std::cout << "\n>> Ingresar Password... " << std::endl;;
+    std::cout << ">> Ingresar Password... " << std::endl;;
     std::cin >> contra;
     std::transform(contra.begin(), contra.end(), contra.begin(), ::tolower);
 
     if (usuario == "admin" && contra == "admin") {
         menuAdmin();
     } else {
-        std::cout << "\n>> Ingresar Departamento... " << std::endl;;
-        std::cin >> depto;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
+
+        std::cout << ">> Ingresar Departamento... " << std::endl;;
+        std::getline(std::cin, depto);
         //volver en minus para no tener Guatemala/guatemala/GUATEMALA/gUaTeMaLa
         std::transform(depto.begin(), depto.end(), depto.begin(), ::tolower);
 
-        std::cout << "\n>> Ingresar Company... " << std::endl;;
-        std::cin >> company;
+        std::cout << ">> Ingresar Company... " << std::endl;;
+        std::getline(std::cin, company);
         //volver en minus para no tener IGSS/igss/Igss/iGsS
         std::transform(company.begin(), company.end(), company.begin(), ::tolower);
 
-
-
-
-        //comprobación de si el usuario existe en la base de datos con if
-        menuUsuario(usuario);
-
-
-
-
+        NodoMatriz *nodoUsuario = matriz->existeEn(matriz->deptoBuscar(depto), company);
+        if (nodoUsuario != nullptr) {
+            while (nodoUsuario != nullptr) {
+                if ((nodoUsuario->getUsuario()->getUsuario() == usuario) && (nodoUsuario->getUsuario()->getContra() == contra)) {
+                    std::cout << "\n>> Bienvenido " << usuario << "!" << std::endl;
+                    usuarioLogueado = nodoUsuario;
+                    menuUsuario(usuarioLogueado->getUsuario()->getNombre());
+                }
+                nodoUsuario = nodoUsuario->getAtras();
+            }
+        } else {
+            std::cout << "\n>> Usuario no encontrado en la base de datos..." << std::endl;
+            mainMenu();
+        }
     }
 }
 
-int main () {
+void mainMenu() {
     /*
     Usuario* usuario_01 = new Usuario("Juan Rodas", "jrodas", "1234");
     matriz->insertarUsuario(usuario_01, "Guatemala", "USAC");
     */
 
     // Usuarios con el mismo departamento y empresa
-    matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", false);
+    matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
     matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "santa rosa", "twitch", false);
-    matriz->insertarUsuario(new Usuario("Juan Rodas", "jrodas", "1234"), "guatemala", "usac", true);
-    matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "guatemala", "usac", false);
+    matriz->insertarUsuario(new Usuario("Eva Davis", "edavis", "pass5"), "santa rosa", "twitch", false);
+                            //matriz->listarUsuarios("santa rosa", "twitch");
+    matriz->insertarUsuario(new Usuario("Juan Rodas", "jrodas", "1234"), "guatemala", "usac", false);
+    matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Juan Camanei", "juancho", "1111"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Tziquin Pashut", "tutsi", "tutsi"), "guatemala", "usac", false);
-    // Usuarios con diferentes departamentos y empresas
+                            //matriz->listarUsuarios("guatemala", "usac");
     matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
     matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "tststo", true);
     matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
@@ -344,30 +361,37 @@ int main () {
     matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "burger king", true);
     matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "kfc", true);
     matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "jalapa", "yhlqmdlg", true);
-    matriz->insertarUsuario(new Usuario("Eva Davis", "edavis", "pass5"), "santa rosa", "twitch", true);
     matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "dept8", "company8", true);
-
     // Usuarios con el mismo departamento pero diferente empresa al final
     matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "baja verapaz", "tikTok", false);
     matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "baja verapaz", "no se", false);
-
+    matriz->listarUsuariosPorDepto("baja verapaz");
+    // Usuarios con el mismo empresa pero diferente departamento al final
+    matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "dept11", "company11", true);
+    matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "dept12", "company11", true);
+    matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "dept13", "company11", false);
+    matriz->listarUsuariosPorCompany("company11");
     int opcion = 0;
 
     std::cout << "\n>> [1]. Login [ADMIN]/[USUARIO]" << std::endl;
     std::cout << ">> [2]. Salir del Programa" << std::endl;
     if (!obtenerOpcion(opcion)) {
-        main();
+        mainMenu();
     }
 
     switch (opcion) {
         case 1:
             login();
-            main();
+            mainMenu();
         case 2:
             std::cout << "\n>> Esperamos que vuelva pronto!!!" << std::endl;
             system(0);
         default:
             std::cout << "\nPor favor escoja una de las opciones disponibles...\n";
     }
+}
+
+int main () {
+    mainMenu();
     return 0;
 }

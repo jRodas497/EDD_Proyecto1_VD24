@@ -202,4 +202,9 @@ CMakeFiles/EDD.dir/main.cpp.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/AVL.h \
- /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Usuario.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/AVL.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Matriz.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/NodoMatriz.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Usuario.h

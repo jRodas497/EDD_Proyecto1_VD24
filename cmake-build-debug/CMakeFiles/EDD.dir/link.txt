@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/EDD.dir/main.cpp.o -o EDD 
+/usr/bin/c++ -g CMakeFiles/EDD.dir/main.cpp.o CMakeFiles/EDD.dir/src/Usuario.cpp.o CMakeFiles/EDD.dir/src/Matriz.cpp.o CMakeFiles/EDD.dir/src/NodoMatriz.cpp.o CMakeFiles/EDD.dir/src/Activo.cpp.o CMakeFiles/EDD.dir/src/AVL.cpp.o -o EDD 

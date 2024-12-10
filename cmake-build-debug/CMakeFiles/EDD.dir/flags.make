@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I"/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/includes"
 
 CXX_FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
 

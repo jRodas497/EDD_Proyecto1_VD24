@@ -107,14 +107,19 @@ NodoMatriz* Matriz::companyBuscar(const std::string& company) {
 
     return nullptr;
 }
+// Comprueba si hay un usuario en la posición [Depto x Company]
 NodoMatriz *Matriz::existeEn(NodoMatriz *cabezaDepto, const std::string &company) {
-    NodoMatriz* aux = cabezaDepto;
+    NodoMatriz* auxDepto = cabezaDepto;
 
-    while (aux->getAbajo() != nullptr) {
-        if (aux->getCabecera() == company) {
-            return aux;
+    if (auxDepto != nullptr) {
+        while (auxDepto->getAbajo() != nullptr) {
+
+            if (company == buscarCabeceraVertical(auxDepto->getAbajo())->getCabecera()) {
+                return auxDepto->getAbajo();
+            }
+
+            auxDepto = auxDepto->getAbajo();
         }
-        aux = aux->getAbajo();
     }
 
     return nullptr;
@@ -123,7 +128,11 @@ NodoMatriz *Matriz::existeEn(NodoMatriz *cabezaDepto, const std::string &company
 NodoMatriz *Matriz::buscarCabeceraVertical(NodoMatriz *nodoUser) {
     NodoMatriz* aux = nodoUser;
 
-    while (aux->getIzquierda() != nullptr) {
+    while (aux->getDelante()) {
+        aux = aux->getDelante();
+    }
+
+    while (aux->getIzquierda()) {
         aux = aux->getIzquierda();
     }
 
@@ -133,7 +142,11 @@ NodoMatriz *Matriz::buscarCabeceraVertical(NodoMatriz *nodoUser) {
 NodoMatriz *Matriz::buscarCabeceraHorizontal(NodoMatriz *nodoUser) {
     NodoMatriz* aux = nodoUser;
 
-    while (aux->getArriba() != nullptr) {
+    while (aux->getDelante()) {
+        aux = aux->getDelante();
+    }
+
+    while (aux->getArriba()) {
         aux = aux->getArriba();
     }
 
@@ -153,8 +166,8 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
     }
     // Caso 2: Si no existe el depto pero si la company(de ultimo)
     else if ( (deptoNodo == nullptr) && (companyNodo == companyUltimo(company)) && (deptoNodo != deptoUltimo(depto)) ) {
-
         deptoNodo = insertarCabHorizontal(depto);
+
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
     }
     // Caso3: Si existe el depto (de ultimo) pero no la company
@@ -167,10 +180,6 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
     else if (deptoNodo == deptoUltimo(depto) && companyNodo == companyUltimo(company)) {
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, insertarAtras);
     }
-
-
-
-
     // caso 5: Company en medio y depto al final
     else if (deptoNodo->getDerecha() == nullptr && companyNodo->getAbajo() != nullptr) {
 
@@ -232,13 +241,15 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
         // Si se desea insertar al final del usuario existente
         if (insertarAtras) {
         	// recorre hasta el final de la lista de usuarios en la posición [Depto x Company]
-        	NodoMatriz* ultimoUsuario = auxDepto; // ó auxCompany
-        	while (ultimoUsuario->getAtras() != nullptr) {
-            	ultimoUsuario = ultimoUsuario->getAtras();
+        	NodoMatriz* primerUsuario = auxDepto; // ó auxCompany
+            NodoMatriz* usuarioActual = auxDepto; // ó auxCompany
+
+        	while (primerUsuario->getAtras()) {
+            	primerUsuario = primerUsuario->getAtras();
         	}
         	// agrega el nuevo usuario detrás del último usuario
-        	ultimoUsuario->setAtras(nuevoUsuario);
-        	nuevoUsuario->setDelante(ultimoUsuario);
+        	primerUsuario->setAtras(nuevoUsuario);
+        	nuevoUsuario->setDelante(primerUsuario);
         // Si se desea insertar al frente del usuario existente
     	} else {
         	// agrega el nuevo usuario delante del primer usuario
@@ -270,6 +281,8 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
 
             primerUsuarioAnterior->setDerecha(nullptr);
             primerUsuarioAnterior->setIzquierda(nullptr);
+
+    	    NodoMatriz* usuarioActual = auxDepto; // ó auxCompany
     	}
         return;
     }
@@ -282,6 +295,64 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
     	auxCompany->setDerecha(nuevoUsuario);
     	nuevoUsuario->setIzquierda(auxCompany);
 
+}
+void Matriz::listarUsuarios(const std::string& depto, const std::string& company) {
+    NodoMatriz* deptoNodo = deptoBuscar(depto);
+    if (deptoNodo == nullptr) {
+        std::cout << "Departamento no encontrado." << std::endl;
+        return;
+    }
+
+    NodoMatriz* companyNodo = existeEn(deptoNodo, company);
+    if (companyNodo == nullptr) {
+        std::cout << "Compañía no encontrada en el departamento especificado." << std::endl;
+        return;
+    }
+
+    NodoMatriz* usuarioNodo = companyNodo;
+    while (usuarioNodo != nullptr) {
+        std::cout << "Usuario: " << usuarioNodo->getUsuario()->getUsuario() << std::endl;
+        usuarioNodo = usuarioNodo->getAtras();
+    }
+}
+// Lista los usuarios de una compañía
+void Matriz::listarUsuariosPorCompany(const std::string& company) {
+    NodoMatriz* companyNodo = companyBuscar(company);
+    if (companyNodo == nullptr) {
+        std::cout << "Compañía no encontrada." << std::endl;
+        return;
+    }
+    std::cout << "Usuarios de: " << company << std::endl;
+    NodoMatriz* usuariosNodo = companyNodo->getDerecha();
+    while (usuariosNodo != nullptr) {
+        std::cout << "Departamento: " << buscarCabeceraHorizontal(usuariosNodo)->getCabecera() << std::endl;
+        NodoMatriz* usuarioNodo = usuariosNodo;
+        while (usuarioNodo != nullptr) {
+            std::cout << "Usuario: " << usuarioNodo->getUsuario()->getUsuario() << std::endl;
+            usuarioNodo = usuarioNodo->getAtras();
+        }
+        usuariosNodo = usuariosNodo->getDerecha();
+    }
+}
+// Lista los usuarios de un departamento
+void Matriz::listarUsuariosPorDepto(const std::string& depto) {
+    NodoMatriz* deptoNodo = deptoBuscar(depto);
+    if (deptoNodo == nullptr) {
+        std::cout << "Departamento no encontrado." << std::endl;
+        return;
+    }
+
+    std::cout << "Usuarios de: " << depto << std::endl;
+    NodoMatriz* usuariosNodo = deptoNodo->getAbajo();
+    while (usuariosNodo != nullptr) {
+        std::cout << "Compañía: " << buscarCabeceraVertical(usuariosNodo)->getCabecera() << std::endl;
+        NodoMatriz* usuarioNodo = usuariosNodo;
+        while (usuarioNodo != nullptr) {
+            std::cout << "Usuario: " << usuarioNodo->getUsuario()->getUsuario() << std::endl;
+            usuarioNodo = usuarioNodo->getAtras();
+        }
+        usuariosNodo = usuariosNodo->getAbajo();
+    }
 }
 /*
 // verifica si ya existe un nodo en la posición [Depto x Company]

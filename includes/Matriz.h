@@ -26,6 +26,7 @@ public:
     // Funciones de inserción de Usuarios
     void insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* companyNodo, bool insertarAtras);
     void insertarUsuario(Usuario* usuario, const std::string& depto, const std::string& company, bool insertarAtras);
+    void companyMidDeptoFin(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, NodoMatriz* nuevoUsuario);
 
     // Funciones de listado
     void listarUsuarios(const std::string& depto, const std::string& company);

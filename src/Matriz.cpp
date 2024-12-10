@@ -60,7 +60,7 @@ NodoMatriz* Matriz::insertarCabVertical(const std::string& company) {
     return nuevoCompany;
 }
 // Cabecera depto más a la derecha
-NodoMatriz* Matriz::deptoUltimo(const std::string& depto) {
+NodoMatriz* Matriz::deptoUltimo() {
     NodoMatriz* aux = inicial;
 
     while (aux->getDerecha()) {
@@ -70,7 +70,7 @@ NodoMatriz* Matriz::deptoUltimo(const std::string& depto) {
     return aux;
 }
 // Cabecera company más abajo
-NodoMatriz* Matriz::companyUltimo(const std::string& company) {
+NodoMatriz* Matriz::companyUltimo() {
     NodoMatriz* aux = inicial;
 
     while (aux->getAbajo()) {
@@ -165,43 +165,47 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
     }
     // Caso 2: Si no existe el depto pero si la company(de ultimo)
-    else if ( (deptoNodo == nullptr) && (companyNodo == companyUltimo(company)) && (deptoNodo != deptoUltimo(depto)) ) {
+    else if ( (deptoNodo == nullptr) && (companyNodo == companyUltimo()) && (deptoNodo != deptoUltimo()) ) {
         deptoNodo = insertarCabHorizontal(depto);
 
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
     }
     // Caso3: Si existe el depto (de ultimo) pero no la company
-    else if ((deptoNodo == deptoUltimo(depto)) && (companyNodo == nullptr)) {
+    else if ((deptoNodo == deptoUltimo()) && (companyNodo == nullptr)) {
         companyNodo = insertarCabVertical(company);
 
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
     }
     // Caso 4: Si ya existen ambos (depto y company) al final se inserta el usuario detras/adelante del(los) usuario/s existente/s
-    else if (deptoNodo == deptoUltimo(depto) && companyNodo == companyUltimo(company)) {
+    else if (deptoNodo == deptoUltimo() && companyNodo == companyUltimo()) {
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, insertarAtras);
     }
     // caso 5: Company en medio y depto al final
-    else if (companyNodo != companyUltimo(company) && deptoNodo == deptoUltimo(depto)) {
+    else if (companyNodo != companyUltimo() && deptoNodo == deptoUltimo()) {
         NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
         companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
     }
     // caso 5.1: company en medio y depto no existe
-    else if (companyNodo != companyUltimo(company) && deptoNodo == nullptr) {
+    else if (companyNodo != companyUltimo() && deptoNodo == nullptr) {
         NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
         deptoNodo = insertarCabHorizontal(depto);
         companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
     }
     // caso 6: Depto en medio y company al final
-    else if (deptoNodo != deptoUltimo(depto) && companyNodo == deptoUltimo(depto)) {
-
+    else if (deptoNodo != deptoUltimo() && companyNodo == companyUltimo()) {
+        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+        deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
     }
     // caso 6.1: Depto en medio y company no existe
-    else if (deptoNodo != deptoUltimo(depto) && companyNodo == nullptr) {
-
+    else if (deptoNodo != deptoUltimo() && companyNodo == nullptr) {
+        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+        companyNodo = insertarCabVertical(company);
+        deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
     }
     // caso 7: Depto y company en medio
-    else if (deptoNodo->getDerecha() != nullptr && companyNodo->getAbajo() != nullptr) {
-
+    else if (deptoNodo !=deptoUltimo() && companyNodo != companyUltimo()) {
+        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+        deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
     }
 }
 // Comprueba si el usuario ya existe en esa posición [Depto x Company]
@@ -223,19 +227,6 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
 
     NodoMatriz* auxDepto = deptoNodo;
     NodoMatriz* auxCompany = companyNodo;
-
-/*
-    // ya se está al final de la cabecera horizontal, borrar más adelante
-    // recorre hasta el final del depto
-    while (auxDepto->getDerecha()) {
-        auxDepto = auxDepto->getDerecha();
-    }
-	// ya se está al final de la cabecera vertical, borrar más adelante
-    // recorre hasta el final de la company
-    while (auxCompany->getAbajo()) {
-        auxCompany = auxCompany->getAbajo();
-    }
-*/
 
     // Llega hasta el usuario más abajo del ultimo depto
     while (auxDepto->getAbajo()) {
@@ -307,7 +298,7 @@ void Matriz::insertarFinal(Usuario* usuario, NodoMatriz* deptoNodo, NodoMatriz* 
     	nuevoUsuario->setIzquierda(auxCompany);
 
 }
-//Company en medio y depto al final
+// Company en medio y depto al final
 void Matriz::companyMidDeptoFin(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, NodoMatriz* nuevoUsuario) {
         NodoMatriz* auxCompany = companyNodo;
         while (auxCompany->getDerecha()) {
@@ -352,6 +343,175 @@ void Matriz::companyMidDeptoFin(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, 
             }
             tempCompany = tempCompany->getArriba();
         }
+}
+// Depto en medio y company al final
+void Matriz::deptoMidCompanyFin(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, NodoMatriz* nuevoUsuario) {
+    NodoMatriz* auxDepto = deptoNodo;
+    while (auxDepto->getAbajo()) {
+        auxDepto = auxDepto->getAbajo();
+    }
+    // relación de arriba
+    auxDepto->setAbajo(nuevoUsuario);
+    nuevoUsuario->setArriba(auxDepto);
+
+    // relación de derecha
+    // Se asigna la busqueda desde el nodo de la derecha de la cabecera de depto
+    NodoMatriz* tempDepto = deptoNodo->getDerecha();
+    // Se recorre la lista de depto hacía la derecha
+    while (tempDepto != nullptr) {
+        NodoMatriz* tempUsuario = tempDepto->getAbajo();
+        // Se recorre la lista de usuarios de los depto's
+        while (tempUsuario != nullptr) {
+            // Se ve si la cabecera de tempUsuario es igual a la cabecera que se busca de company
+            if (buscarCabeceraVertical(tempUsuario)->getCabecera() == companyNodo->getCabecera()) {
+                nuevoUsuario->setDerecha(tempUsuario);
+                tempUsuario->setIzquierda(nuevoUsuario);
+                break;
+            }
+            tempUsuario = tempUsuario->getAbajo();
+        }
+        tempDepto = tempDepto->getDerecha();
+    }
+
+    // relación de izquierda
+    // Se asigna la busqueda desde el nodo de la izquierda de la cabecera de depto
+    tempDepto = deptoNodo->getIzquierda();
+    // Se recorre la lista de depto hacía la izquierda
+    while (tempDepto != nullptr) {
+        NodoMatriz* tempUsuario = tempDepto->getAbajo();
+        // Se recorre la lista de usuarios de los depto's
+        while (tempUsuario != nullptr) {
+            // Se ve si la cabecera de tempUsuario es igual a la cabecera que se busca de company
+            if (buscarCabeceraVertical(tempUsuario)->getCabecera() == companyNodo->getCabecera()) {
+                nuevoUsuario->setIzquierda(tempUsuario);
+                tempUsuario->setDerecha(nuevoUsuario);
+                break;
+            }
+            tempUsuario = tempUsuario->getAbajo();
+        }
+        tempDepto = tempDepto->getIzquierda();
+    }
+}
+// Insertar un usuario con depto y company en medio
+void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, NodoMatriz* nuevoUsuario) {
+    // relación de arriba
+    NodoMatriz* tempCompany = companyNodo->getArriba();
+    // se verifica si la company tiene nodos arriba
+    if (tempCompany != inicial) {
+        // se recorre la lista de company hacía arriba
+        while (tempCompany != nullptr) {
+            NodoMatriz* tempUsuario = tempCompany->getDerecha();
+            // Se recorre la lista de usuarios de la company
+            while (tempUsuario != nullptr) {
+                // Se ve si la cabecera de tempUsuario es igual a la cabecera que se busca de depto
+                if (buscarCabeceraHorizontal(tempUsuario)->getCabecera() == deptoNodo->getCabecera()) {
+                    nuevoUsuario->setArriba(tempUsuario);
+                    tempUsuario->setAbajo(nuevoUsuario);
+                    tempUsuario = nullptr;
+                }
+                if (tempUsuario != nullptr) {
+                    tempUsuario = tempUsuario->getDerecha();
+                } else {
+                    tempCompany = nullptr;
+                    break;
+                }
+            }
+            if (tempCompany != nullptr) {
+                tempCompany = tempCompany->getArriba();
+            } else {
+                break;
+            }
+        }
+    }
+
+    // relación de abajo
+    // Se asigna la busqueda desde el nodo de abajo de la cabecera de company
+    tempCompany = companyNodo->getAbajo();
+    // se verifica si la company tiene nodos abajo
+    if (tempCompany != nullptr) {
+        // Se recorre la lista de company hacía abajo
+        while (tempCompany != nullptr) {
+            NodoMatriz* tempUsuario = tempCompany->getDerecha();
+            // Se recorre la lista de usuarios de la company
+            while (tempUsuario != nullptr) {
+                // Se ve si la cabecera de tempUsuario es igual a la cabecera que se busca de depto
+                if (buscarCabeceraHorizontal(tempUsuario)->getCabecera() == deptoNodo->getCabecera()) {
+                    nuevoUsuario->setAbajo(tempUsuario);
+                    tempUsuario->setArriba(nuevoUsuario);
+                    tempUsuario = nullptr;
+                }
+                if (tempUsuario != nullptr) {
+                    tempUsuario = tempUsuario->getDerecha();
+                } else {
+                    tempCompany = nullptr;
+                    break;
+                }
+            }
+            if (tempCompany != nullptr) {
+                tempCompany = tempCompany->getAbajo();
+            } else {
+                break;
+            }
+        }
+    }
+
+    // relación de derecha
+    // Se asigna la busqueda desde el nodo de la derecha de la cabecera de depto
+    NodoMatriz* tempDepto = deptoNodo->getDerecha();
+    // Se recorre la lista de depto hacía la derecha
+    while (tempDepto != nullptr) {
+        NodoMatriz* tempUsuario = tempDepto->getAbajo();
+        // Se recorre la lista de usuarios de los depto's
+        while (tempUsuario != nullptr) {
+            // Se ve si la cabecera de tempUsuario es igual a la cabecera que se busca de company
+            if (buscarCabeceraVertical(tempUsuario)->getCabecera() == companyNodo->getCabecera()) {
+                nuevoUsuario->setDerecha(tempUsuario);
+                tempUsuario->setIzquierda(nuevoUsuario);
+                tempUsuario = nullptr;
+            }
+            if (tempUsuario != nullptr) {
+                tempUsuario = tempUsuario->getAbajo();
+            } else {
+                tempDepto = nullptr;
+                break;
+            }
+        }
+        if (tempDepto != nullptr) {
+            tempDepto = tempDepto->getDerecha();
+        } else {
+            break;
+        }
+    }
+
+    // relación de izquierda
+    // Se asigna la busqueda desde el nodo de la izquierda de la cabecera de depto
+    tempDepto = deptoNodo->getIzquierda();
+    // Se recorre la lista de depto hacía la izquierda
+    if (tempDepto != inicial) {
+        while (tempDepto != nullptr) {
+            NodoMatriz* tempUsuario = tempDepto->getAbajo();
+            // Se recorre la lista de usuarios de los depto's
+            while (tempUsuario != nullptr) {
+                // Se ve si la cabecera de tempUsuario es igual a la cabecera que se busca de company
+                if (buscarCabeceraVertical(tempUsuario)->getCabecera() == companyNodo->getCabecera()) {
+                    nuevoUsuario->setIzquierda(tempUsuario);
+                    tempUsuario->setDerecha(nuevoUsuario);
+                    tempUsuario = nullptr;
+                }
+                if (tempUsuario != nullptr) {
+                    tempUsuario = tempUsuario->getAbajo();
+                } else {
+                    tempDepto = nullptr;
+                    break;
+                }
+            }
+            if (tempDepto != nullptr) {
+                tempDepto = tempDepto->getIzquierda();
+            } else {
+                break;
+            }
+        }
+    }
 }
 // Lista los usuarios de un depto y una company
 void Matriz::listarUsuarios(const std::string& depto, const std::string& company) {

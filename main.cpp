@@ -356,9 +356,15 @@ void mainMenu() {
     matriz->listarUsuarios("santa rosa", "twitch");
     matriz->insertarUsuario(new Usuario("Marco Tulio", "mt", "pass"), "santa rosa", "usac", false);
     matriz->listarUsuarios("santa rosa", "usac");
+    matriz->insertarUsuario(new Usuario("Juan Carlos", "carlos", "pass"), "guatemala", "twitch", false);
+    matriz->listarUsuarios("guatemala", "twitch");
 
     matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
     matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "tststo", true);
+
+    matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
+    matriz->listarUsuarios("santa rosa", "irtra");
+
     matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
     matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "max", true);
     matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "burger king", true);

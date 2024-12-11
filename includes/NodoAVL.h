@@ -17,18 +17,18 @@ public:
     Activo* getActivo();
     NodoAVL*& getHijoDer();
     NodoAVL*& getHijoIzq();
-    int getAltura();
+    int getAlto();
     //setters
     void setActivo(Activo* activo);
     void setHijoDer(NodoAVL* hijoDer);
     void setHijoIzq(NodoAVL* hijoIzq);
-    void setAltura(int altura);
+    void setAlto(int altura);
 
 private:
     Activo* activo;
     NodoAVL* hijoDer;
     NodoAVL* hijoIzq;
-    int altura;
+    int alto;
 };
 
 #endif //NODOAVL_H

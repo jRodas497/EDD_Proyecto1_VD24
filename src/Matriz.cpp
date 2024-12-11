@@ -186,24 +186,24 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
         // caso 5: Company en medio y depto al final
         else if (companyNodo != companyUltimo() && deptoNodo == deptoUltimo()) {
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-            companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
+            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
         // caso 5.1: company en medio y depto no existe
         else if (companyNodo != companyUltimo() && deptoNodo == nullptr) {
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
             deptoNodo = insertarCabHorizontal(depto);
-            companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
+            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
         // caso 6: Depto en medio y company al final
         else if (deptoNodo != deptoUltimo() && companyNodo == companyUltimo()) {
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-            deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
+            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
         // caso 6.1: Depto en medio y company no existe
         else if (deptoNodo != deptoUltimo() && companyNodo == nullptr) {
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
             companyNodo = insertarCabVertical(company);
-            deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
+            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
         // caso 7: Depto y company en medio
         else if (deptoNodo !=deptoUltimo() && companyNodo != companyUltimo()) {
@@ -527,8 +527,6 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
         }
     }
 }
-
-
 /*
  ===================================================================================================================
  [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[      FUNCIONES DE REPORTE      ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -754,6 +752,7 @@ if (auxCompany->getIzquierda() == auxDepto->getAbajo()) {
         nuevoUsuario->setDelante(ultimoUsuario);
         return;
 */
+
 /*
 if (auxDepto == auxCompany) {
     char posicion;

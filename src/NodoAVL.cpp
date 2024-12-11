@@ -5,7 +5,7 @@
 #include "../includes/Activo.h"
 
 NodoAVL::NodoAVL(Activo* activo)
-    : activo(activo), hijoDer(nullptr), hijoIzq(nullptr), altura(0) {}
+    : activo(activo), hijoDer(nullptr), hijoIzq(nullptr), alto(0) {}
 
 void NodoAVL::setActivo(Activo* activo) {
     this->activo = activo;
@@ -31,10 +31,10 @@ NodoAVL*& NodoAVL::getHijoIzq() {
     return hijoIzq;
 }
 
-void NodoAVL::setAltura(int altura) {
+void NodoAVL::setAlto(int altura) {
     this->altura = altura;
 }
 
-int NodoAVL::getAltura() {
+int NodoAVL::getAlto() {
     return altura;
 }

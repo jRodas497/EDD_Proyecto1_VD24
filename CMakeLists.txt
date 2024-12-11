@@ -11,7 +11,7 @@ set(SOURCES
         src/Matriz.cpp
         src/NodoMatriz.cpp
         src/Activo.cpp
-        src/AVL.cpp
+        src/ArbolAVL.cpp
         includes/NodoAVL.h
         src/NodoAVL.cpp
 )

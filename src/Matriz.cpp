@@ -210,9 +210,10 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
             deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
-    } else {
+    }     else if (deptoNodo != nullptr && companyNodo != nullptr)  {
         // Caso 8: Si ya existen ambas cabeceras
-        insertarFinal(usuarioNuevo, deptoNodo, companyNodo, insertarAtras);
+        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+        deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
     }
 }
 // Comprueba si el usuario ya existe en esa posición [Depto x Company]
@@ -407,7 +408,6 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
     if (tempCompany == inicial) {
         nuevoUsuario->setArriba(deptoNodo);
         deptoNodo->setAbajo(nuevoUsuario);
-        return;
     } else if (tempCompany != nullptr) {
         // se recorre la lista de company hacía arriba
         while (tempCompany != nullptr) {
@@ -501,7 +501,6 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
     if (tempDepto == inicial) {
         nuevoUsuario->setIzquierda(companyNodo);
         companyNodo->setDerecha(nuevoUsuario);
-        return;
     } else if (tempDepto != nullptr) {
         while (tempDepto != nullptr) {
             NodoMatriz* tempUsuario = tempDepto->getAbajo();

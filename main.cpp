@@ -349,10 +349,14 @@ void mainMenu() {
     matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Juan Camanei", "juancho", "1111"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Tziquin Pashut", "tutsi", "tutsi"), "guatemala", "usac", false);
+
+
                 //matriz->listarUsuarios("guatemala", "usac");
     matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
     matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "santa rosa", "twitch", false);
     matriz->insertarUsuario(new Usuario("Eva Davis", "edavis", "pass5"), "santa rosa", "twitch", false);
+
+
                 //matriz->listarUsuarios("santa rosa", "twitch");
     matriz->insertarUsuario(new Usuario("Marco Tulio", "mt", "pass"), "santa rosa", "usac", false);
                 //matriz->listarUsuarios("santa rosa", "usac");
@@ -362,7 +366,7 @@ void mainMenu() {
     matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
     matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "vcorp", true);
 
-    //matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
+    matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
                 //matriz->listarUsuarios("santa rosa", "irtra");
 
     matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);

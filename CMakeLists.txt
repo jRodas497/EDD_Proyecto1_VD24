@@ -12,6 +12,8 @@ set(SOURCES
         src/NodoMatriz.cpp
         src/Activo.cpp
         src/AVL.cpp
+        includes/NodoAVL.h
+        src/NodoAVL.cpp
 )
 
 # Add executable

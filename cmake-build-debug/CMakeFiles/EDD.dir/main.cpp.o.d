@@ -203,6 +203,8 @@ CMakeFiles/EDD.dir/main.cpp.o: \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/AVL.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/../includes/NodoAVL.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/../includes/Activo.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Usuario.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/AVL.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Matriz.h \

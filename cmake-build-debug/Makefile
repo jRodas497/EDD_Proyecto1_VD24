@@ -225,6 +225,30 @@ src/Matriz.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/Matriz.cpp.s
 .PHONY : src/Matriz.cpp.s
 
+src/NodoAVL.o: src/NodoAVL.cpp.o
+.PHONY : src/NodoAVL.o
+
+# target to build an object file
+src/NodoAVL.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoAVL.cpp.o
+.PHONY : src/NodoAVL.cpp.o
+
+src/NodoAVL.i: src/NodoAVL.cpp.i
+.PHONY : src/NodoAVL.i
+
+# target to preprocess a source file
+src/NodoAVL.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoAVL.cpp.i
+.PHONY : src/NodoAVL.cpp.i
+
+src/NodoAVL.s: src/NodoAVL.cpp.s
+.PHONY : src/NodoAVL.s
+
+# target to generate assembly for a file
+src/NodoAVL.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoAVL.cpp.s
+.PHONY : src/NodoAVL.cpp.s
+
 src/NodoMatriz.o: src/NodoMatriz.cpp.o
 .PHONY : src/NodoMatriz.o
 
@@ -294,6 +318,9 @@ help:
 	@echo "... src/Matriz.o"
 	@echo "... src/Matriz.i"
 	@echo "... src/Matriz.s"
+	@echo "... src/NodoAVL.o"
+	@echo "... src/NodoAVL.i"
+	@echo "... src/NodoAVL.s"
 	@echo "... src/NodoMatriz.o"
 	@echo "... src/NodoMatriz.i"
 	@echo "... src/NodoMatriz.s"

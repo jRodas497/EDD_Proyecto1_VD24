@@ -4,7 +4,9 @@
 #ifndef AVL_H
 #define AVL_H
 
+#include <iostream>
 #include "Activo.h"
+#include "../includes/NodoAVL.h"
 
 class AVL {
 public:

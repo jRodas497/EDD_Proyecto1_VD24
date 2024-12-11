@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/EDD.dir/src/Activo.cpp.o.d"
   "CMakeFiles/EDD.dir/src/Matriz.cpp.o"
   "CMakeFiles/EDD.dir/src/Matriz.cpp.o.d"
+  "CMakeFiles/EDD.dir/src/NodoAVL.cpp.o"
+  "CMakeFiles/EDD.dir/src/NodoAVL.cpp.o.d"
   "CMakeFiles/EDD.dir/src/NodoMatriz.cpp.o"
   "CMakeFiles/EDD.dir/src/NodoMatriz.cpp.o.d"
   "CMakeFiles/EDD.dir/src/Usuario.cpp.o"

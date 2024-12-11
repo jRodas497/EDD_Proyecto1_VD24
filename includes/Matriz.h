@@ -35,6 +35,9 @@ public:
     void listarUsuariosPorCompany(const std::string& company);
     void listarUsuariosPorDepto(const std::string& depto);
 
+    // Funciones de reporte
+    void reporteMatrizDispersa();
+
 private:
     NodoMatriz* inicial;
     NodoMatriz* cabeceraH;

@@ -3,6 +3,8 @@
 //
 #include <iostream>
 #include <string>
+#include <fstream>
+
 #include "../includes/Matriz.h"
 
 Matriz::Matriz()
@@ -158,54 +160,59 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
     NodoMatriz* deptoNodo = deptoBuscar(depto);
     NodoMatriz* companyNodo = companyBuscar(company);
 
-    // Caso 1: Si no existe el depto ni la company, se crean
-    if (deptoNodo == nullptr && companyNodo == nullptr) {
-        deptoNodo = insertarCabHorizontal(depto);
-        companyNodo = insertarCabVertical(company);
-        insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
-    }
-    // Caso 2: Si no existe el depto pero si la company(de ultimo)
-    else if ( (deptoNodo == nullptr) && (companyNodo == companyUltimo()) && (deptoNodo != deptoUltimo()) ) {
-        deptoNodo = insertarCabHorizontal(depto);
+    if (deptoNodo == nullptr || companyNodo == nullptr) {
+        // Caso 1: Si no existe el depto ni la company, se crean
+        if (deptoNodo == nullptr && companyNodo == nullptr) {
+            deptoNodo = insertarCabHorizontal(depto);
+            companyNodo = insertarCabVertical(company);
+            insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
+        }
+        // Caso 2: Si no existe el depto pero si la company(de ultimo)
+        else if ( (deptoNodo == nullptr) && (companyNodo == companyUltimo()) && (deptoNodo != deptoUltimo()) ) {
+            deptoNodo = insertarCabHorizontal(depto);
 
-        insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
-    }
-    // Caso3: Si existe el depto (de ultimo) pero no la company
-    else if ((deptoNodo == deptoUltimo()) && (companyNodo == nullptr)) {
-        companyNodo = insertarCabVertical(company);
+            insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
+        }
+        // Caso3: Si existe el depto (de ultimo) pero no la company
+        else if ((deptoNodo == deptoUltimo()) && (companyNodo == nullptr)) {
+            companyNodo = insertarCabVertical(company);
 
-        insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
-    }
-    // Caso 4: Si ya existen ambos (depto y company) al final se inserta el usuario detras/adelante del(los) usuario/s existente/s
-    else if (deptoNodo == deptoUltimo() && companyNodo == companyUltimo()) {
+            insertarFinal(usuarioNuevo, deptoNodo, companyNodo, false);
+        }
+        // Caso 4: Si ya existen ambos (depto y company) al final se inserta el usuario detras/adelante del(los) usuario/s existente/s
+        else if (deptoNodo == deptoUltimo() && companyNodo == companyUltimo()) {
+            insertarFinal(usuarioNuevo, deptoNodo, companyNodo, insertarAtras);
+        }
+        // caso 5: Company en medio y depto al final
+        else if (companyNodo != companyUltimo() && deptoNodo == deptoUltimo()) {
+            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+            companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
+        }
+        // caso 5.1: company en medio y depto no existe
+        else if (companyNodo != companyUltimo() && deptoNodo == nullptr) {
+            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+            deptoNodo = insertarCabHorizontal(depto);
+            companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
+        }
+        // caso 6: Depto en medio y company al final
+        else if (deptoNodo != deptoUltimo() && companyNodo == companyUltimo()) {
+            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+            deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
+        }
+        // caso 6.1: Depto en medio y company no existe
+        else if (deptoNodo != deptoUltimo() && companyNodo == nullptr) {
+            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+            companyNodo = insertarCabVertical(company);
+            deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
+        }
+        // caso 7: Depto y company en medio
+        else if (deptoNodo !=deptoUltimo() && companyNodo != companyUltimo()) {
+            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
+        }
+    } else {
+        // Caso 8: Si ya existen ambas cabeceras
         insertarFinal(usuarioNuevo, deptoNodo, companyNodo, insertarAtras);
-    }
-    // caso 5: Company en medio y depto al final
-    else if (companyNodo != companyUltimo() && deptoNodo == deptoUltimo()) {
-        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-        companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
-    }
-    // caso 5.1: company en medio y depto no existe
-    else if (companyNodo != companyUltimo() && deptoNodo == nullptr) {
-        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-        deptoNodo = insertarCabHorizontal(depto);
-        companyMidDeptoFin(deptoNodo, companyNodo, nuevoUsuario);
-    }
-    // caso 6: Depto en medio y company al final
-    else if (deptoNodo != deptoUltimo() && companyNodo == companyUltimo()) {
-        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-        deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
-    }
-    // caso 6.1: Depto en medio y company no existe
-    else if (deptoNodo != deptoUltimo() && companyNodo == nullptr) {
-        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-        companyNodo = insertarCabVertical(company);
-        deptoMidCompanyFin(deptoNodo, companyNodo, nuevoUsuario);
-    }
-    // caso 7: Depto y company en medio
-    else if (deptoNodo !=deptoUltimo() && companyNodo != companyUltimo()) {
-        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-        deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
     }
 }
 // Comprueba si el usuario ya existe en esa posición [Depto x Company]
@@ -397,7 +404,11 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
     // relación de arriba
     NodoMatriz* tempCompany = companyNodo->getArriba();
     // se verifica si la company tiene nodos arriba
-    if (tempCompany != inicial) {
+    if (tempCompany == inicial) {
+        nuevoUsuario->setArriba(deptoNodo);
+        deptoNodo->setAbajo(nuevoUsuario);
+        return;
+    } else if (tempCompany != nullptr) {
         // se recorre la lista de company hacía arriba
         while (tempCompany != nullptr) {
             NodoMatriz* tempUsuario = tempCompany->getDerecha();
@@ -487,7 +498,11 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
     // Se asigna la busqueda desde el nodo de la izquierda de la cabecera de depto
     tempDepto = deptoNodo->getIzquierda();
     // Se recorre la lista de depto hacía la izquierda
-    if (tempDepto != inicial) {
+    if (tempDepto == inicial) {
+        nuevoUsuario->setIzquierda(companyNodo);
+        companyNodo->setDerecha(nuevoUsuario);
+        return;
+    } else if (tempDepto != nullptr) {
         while (tempDepto != nullptr) {
             NodoMatriz* tempUsuario = tempDepto->getAbajo();
             // Se recorre la lista de usuarios de los depto's
@@ -512,6 +527,148 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
             }
         }
     }
+}
+
+
+/*
+ ===================================================================================================================
+ [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[      FUNCIONES DE REPORTE      ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+ ===================================================================================================================
+ */
+void Matriz::reporteMatrizDispersa() {
+    NodoMatriz* aux = inicial;
+    NodoMatriz* aux2 = nullptr;
+
+    std::string dot = "";
+    dot += "digraph G{\n";
+    dot += "{node[shape = box, group = a];\n";
+
+    // recorrer cabeceras company / verticales
+    while (aux != nullptr) {
+        dot += "\"" + aux->getCabecera() + "\" -> ";
+
+        aux2 = aux;
+        aux = aux->getAbajo();
+    }
+    aux = aux2->getArriba();
+    while (aux != nullptr) {
+        if (aux != inicial) {
+            dot += "\"" + aux->getCabecera() + "\" -> ";
+        } else {
+            dot += "\"" + aux->getCabecera() + "\"\n}";
+            break;
+        }
+        aux = aux->getArriba();
+    }
+
+    dot += "\n{";
+    dot += "\nrank=same;";
+    dot += "\nnode[shape = box, group = true];\n";
+
+
+    // recorriendo cabeceras depto / horizontales
+    aux = inicial;
+    while (aux != nullptr) {
+        dot += "\"" + aux->getCabecera() + "\" -> ";
+
+        aux2 = aux;
+        aux = aux->getDerecha();
+    }
+
+    aux = aux2->getIzquierda();
+
+    while (aux != nullptr) {
+        if (aux != inicial) {
+            dot += "\"" + aux->getCabecera() + "\" -> ";
+        } else {
+            dot += "\"" + aux->getCabecera() + "\"\n}";
+            break;
+        }
+        aux = aux->getIzquierda();
+    }
+    dot += "\nnode[shape = box, group = true];\n";
+
+
+    // recorrer las filas de la matriz
+    NodoMatriz* aux3 = inicial->getAbajo();
+    aux3 = inicial->getAbajo();
+    aux = aux3;
+    while (aux != nullptr) {
+        if (aux->getAbajo() != nullptr) {
+            dot += "{rank=same;";
+        } else {
+            dot += "{rank=max;";
+        }
+        while (aux != nullptr) {
+            if (aux->getUsuario() != nullptr) {
+                dot += "\"" + aux->getUsuario()->getUsuario() + "\" ->";
+            } else {
+                dot += "\"" + aux->getCabecera() + "\" ->";
+            }
+            aux2 = aux;
+            aux = aux->getDerecha();
+        }
+        aux = aux2->getIzquierda();
+        while (aux != nullptr) {
+            if (aux != aux3) {
+                if (aux->getUsuario() != nullptr) {
+                    dot += "\"" + aux->getUsuario()->getUsuario() + "\" ->";
+                } else {
+                    dot += "\"" + aux->getCabecera() + "\" ->";
+                }
+            } else {
+                dot += "\"" + aux->getCabecera() + "\"}\n";
+                break;
+            }
+            aux = aux->getIzquierda();
+        }
+        aux = aux->getAbajo();
+        aux3 = aux3->getAbajo();
+    }
+
+
+    // recorrer columnas de la matriz
+    aux3 = inicial->getDerecha();
+    aux = aux3;
+    while (aux != nullptr) {
+        while (aux != nullptr) {
+            if (aux->getUsuario() != nullptr) {
+                dot += "\"" + aux->getUsuario()->getUsuario() + "\" ->";
+            } else {
+                dot += "\"" + aux->getCabecera() + "\" ->";
+            }
+            aux2 = aux;
+            aux = aux->getAbajo();
+        }
+        aux = aux2->getArriba();
+        while (aux != nullptr) {
+            if (aux != aux3) {
+                if (aux->getUsuario() != nullptr) {
+                    dot += "\"" + aux->getUsuario()->getUsuario() + "\" ->";
+                } else {
+                    dot += "\"" + aux->getCabecera() + "\" ->";
+                }
+            } else {
+                dot += "\"" + aux->getCabecera() + "\"\n";
+                break;
+            }
+            aux = aux->getArriba();
+        }
+        aux = aux->getDerecha();
+        aux3 = aux3->getDerecha();
+    }
+
+    dot += "\n}";
+
+    std::ofstream file;
+    file.open("../Graficas/reporteMatrizDispersa.txt");
+
+    if (file.is_open()) {
+        file << dot;
+        file.close();
+    }
+    system("dot -Tpng ../Graficas/reporteMatrizDispersa.txt -o ../Graficas/reporteMatrizDispersa.png");
+
 }
 // Lista los usuarios de un depto y una company
 void Matriz::listarUsuarios(const std::string& depto, const std::string& company) {

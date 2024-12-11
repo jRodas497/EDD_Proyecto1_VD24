@@ -177,8 +177,8 @@ void registrarUsuario() {
 }
 
 void reporteMatrizDispersa() {
-    //matrizDispersa.reporte();
     std::cout << "\n>> Reporte de la Matriz Dispersa [Departamentos x Empresas] generado! \n";
+    matriz -> reporteMatrizDispersa();
     system("pause");
 }
 
@@ -349,36 +349,36 @@ void mainMenu() {
     matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Juan Camanei", "juancho", "1111"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Tziquin Pashut", "tutsi", "tutsi"), "guatemala", "usac", false);
-    matriz->listarUsuarios("guatemala", "usac");
+                //matriz->listarUsuarios("guatemala", "usac");
     matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
     matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "santa rosa", "twitch", false);
     matriz->insertarUsuario(new Usuario("Eva Davis", "edavis", "pass5"), "santa rosa", "twitch", false);
-    matriz->listarUsuarios("santa rosa", "twitch");
+                //matriz->listarUsuarios("santa rosa", "twitch");
     matriz->insertarUsuario(new Usuario("Marco Tulio", "mt", "pass"), "santa rosa", "usac", false);
-    matriz->listarUsuarios("santa rosa", "usac");
+                //matriz->listarUsuarios("santa rosa", "usac");
     matriz->insertarUsuario(new Usuario("Juan Carlos", "carlos", "pass"), "guatemala", "twitch", false);
-    matriz->listarUsuarios("guatemala", "twitch");
+                //matriz->listarUsuarios("guatemala", "twitch");
 
     matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
-    matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "tststo", true);
+    matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "vcorp", true);
 
-    matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
-    matriz->listarUsuarios("santa rosa", "irtra");
+    //matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
+                //matriz->listarUsuarios("santa rosa", "irtra");
 
     matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "max", true);
-    matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "burger king", true);
-    matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "kfc", true);
-    matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "jalapa", "yhlqmdlg", true);
-    matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "dept8", "company8", true);
-    /*// Usuarios con el mismo departamento pero diferente empresa al final
-    matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "baja verapaz", "tikTok", false);
-    matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "baja verapaz", "no se", false);
-    matriz->listarUsuariosPorDepto("baja verapaz");*/
+    matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "jalapa", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "chimaltenango", "bigmc", true);
+    // Usuarios con el mismo departamento pero diferente empresa al final
+    matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "baja verapaz", "bigmc", false);
+    matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "baja verapaz", "bigmc", false);
+                //matriz->listarUsuariosPorDepto("baja verapaz");
     // Usuarios con el mismo empresa pero diferente departamento al final
-    matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "dept11", "company11", true);
-    matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "dept12", "company11", true);
-    matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "dept13", "company11", false);
+    matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "escuintla", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "huehuetenango", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "retalhuleu", "bigmc", false);
     //matriz->listarUsuariosPorCompany("company11");
 
     int opcion = 0;

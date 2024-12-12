@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/EDD.dir/main.cpp.o"
   "CMakeFiles/EDD.dir/main.cpp.o.d"
-  "CMakeFiles/EDD.dir/src/AVL.cpp.o"
-  "CMakeFiles/EDD.dir/src/AVL.cpp.o.d"
   "CMakeFiles/EDD.dir/src/Activo.cpp.o"
   "CMakeFiles/EDD.dir/src/Activo.cpp.o.d"
+  "CMakeFiles/EDD.dir/src/ArbolAVL.cpp.o"
+  "CMakeFiles/EDD.dir/src/ArbolAVL.cpp.o.d"
   "CMakeFiles/EDD.dir/src/Matriz.cpp.o"
   "CMakeFiles/EDD.dir/src/Matriz.cpp.o.d"
   "CMakeFiles/EDD.dir/src/NodoAVL.cpp.o"

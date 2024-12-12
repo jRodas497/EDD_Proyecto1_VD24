@@ -25,7 +25,7 @@ bool Activo::getRentado() {
 }
 
 // setters
-void Activo::setId(const std::string& idAlfa) {
+void Activo::setId(const std::string& id) {
     this->id = id;
 }
 

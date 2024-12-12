@@ -1,4 +1,13 @@
 /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD" -B "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug"
--- Configuring done (0.0s)
--- Generating done (0.1s)
--- Build files have been written to: /mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug
+-- Configuring done (0.1s)
+CMake Error at CMakeLists.txt:20 (add_executable):
+  Cannot find source file:
+
+    src/ArbolAVL/ArbolAVL.cpp
+
+
+CMake Error at CMakeLists.txt:20 (add_executable):
+  No SOURCES given to target: EDD
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

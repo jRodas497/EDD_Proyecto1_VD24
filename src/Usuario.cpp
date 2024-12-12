@@ -4,7 +4,6 @@
 #include "../includes/Usuario.h"
 #include <string>
 #include <iostream>
-#include "../includes/AVL.h"
 
 int::Usuario::nextId = 1;
 
@@ -30,7 +29,7 @@ const std::string& Usuario::getContra() {
     return contra;
 }
 
-AVL* Usuario::getArbol() {
+ArbolAVL* Usuario::getArbol() {
     return arbolActivos;
 }
 
@@ -47,6 +46,6 @@ void Usuario::setContra(const std::string& contra) {
     this->contra = contra;
 }
 
-void Usuario::setArbol(AVL* arbolActivos) {
+void Usuario::setArbol(ArbolAVL* arbolActivos) {
     this->arbolActivos = arbolActivos;
 }

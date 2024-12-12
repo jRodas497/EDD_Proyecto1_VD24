@@ -8,7 +8,6 @@
 #include <cctype>
 #include <random>
 #include "includes/Activo.h"
-#include "includes/AVL.h"
 #include "includes/Usuario.h"
 #include "includes/Matriz.h"
 

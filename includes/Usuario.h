@@ -5,7 +5,7 @@
 #define USUARIO_H
 
 #include <string>
-#include "AVL.h"
+#include "ArbolAVL.h"
 #include "Activo.h"
 
 class Usuario {
@@ -16,12 +16,12 @@ public:
     const std::string& getNombre();
     const std::string& getUsuario();
     const std::string& getContra();
-    AVL* getArbol();
+    ArbolAVL* getArbol();
     // setters
     void setNombre(const std::string& nombre);
     void setUsuario(const std::string& usuario);
     void setContra(const std::string& contra);
-    void setArbol(AVL* arbolActivos);
+    void setArbol(ArbolAVL* arbolActivos);
 
 private:
     static int nextId;
@@ -29,7 +29,7 @@ private:
     std::string nombre;
     std::string usuario;
     std::string contra;
-    AVL* arbolActivos;
+    ArbolAVL* arbolActivos;
 };
 
 #endif // USUARIO_H

@@ -32,9 +32,9 @@ NodoAVL*& NodoAVL::getHijoIzq() {
 }
 
 void NodoAVL::setAlto(int altura) {
-    this->altura = altura;
+    this->alto = altura;
 }
 
 int NodoAVL::getAlto() {
-    return altura;
+    return alto;
 }

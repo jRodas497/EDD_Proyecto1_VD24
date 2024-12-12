@@ -153,30 +153,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/AVL.o: src/AVL.cpp.o
-.PHONY : src/AVL.o
-
-# target to build an object file
-src/AVL.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/AVL.cpp.o
-.PHONY : src/AVL.cpp.o
-
-src/AVL.i: src/AVL.cpp.i
-.PHONY : src/AVL.i
-
-# target to preprocess a source file
-src/AVL.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/AVL.cpp.i
-.PHONY : src/AVL.cpp.i
-
-src/AVL.s: src/AVL.cpp.s
-.PHONY : src/AVL.s
-
-# target to generate assembly for a file
-src/AVL.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/AVL.cpp.s
-.PHONY : src/AVL.cpp.s
-
 src/Activo.o: src/Activo.cpp.o
 .PHONY : src/Activo.o
 
@@ -200,6 +176,30 @@ src/Activo.s: src/Activo.cpp.s
 src/Activo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/Activo.cpp.s
 .PHONY : src/Activo.cpp.s
+
+src/ArbolAVL.o: src/ArbolAVL.cpp.o
+.PHONY : src/ArbolAVL.o
+
+# target to build an object file
+src/ArbolAVL.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ArbolAVL.cpp.o
+.PHONY : src/ArbolAVL.cpp.o
+
+src/ArbolAVL.i: src/ArbolAVL.cpp.i
+.PHONY : src/ArbolAVL.i
+
+# target to preprocess a source file
+src/ArbolAVL.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ArbolAVL.cpp.i
+.PHONY : src/ArbolAVL.cpp.i
+
+src/ArbolAVL.s: src/ArbolAVL.cpp.s
+.PHONY : src/ArbolAVL.s
+
+# target to generate assembly for a file
+src/ArbolAVL.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ArbolAVL.cpp.s
+.PHONY : src/ArbolAVL.cpp.s
 
 src/Matriz.o: src/Matriz.cpp.o
 .PHONY : src/Matriz.o
@@ -309,12 +309,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/AVL.o"
-	@echo "... src/AVL.i"
-	@echo "... src/AVL.s"
 	@echo "... src/Activo.o"
 	@echo "... src/Activo.i"
 	@echo "... src/Activo.s"
+	@echo "... src/ArbolAVL.o"
+	@echo "... src/ArbolAVL.i"
+	@echo "... src/ArbolAVL.s"
 	@echo "... src/Matriz.o"
 	@echo "... src/Matriz.i"
 	@echo "... src/Matriz.s"

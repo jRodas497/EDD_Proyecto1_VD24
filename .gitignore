@@ -1,4 +1,15 @@
 */.idea
 */cmake-build-debug
+*/png
+*/.vscode
+*/.vs
+*/.git
+*/.gitignore
+*/.gitattributes
+*/.gitmodules
+
+cmake-build*/
+Graficas/
+CMakeLists.txt
 
 *.out

@@ -7,10 +7,10 @@
 
 #include "../includes/Matriz.h"
 
+// Inicializar la matriz dispersa
 Matriz::Matriz()
-    {
-    inicial = new NodoMatriz("(0,0)");
-}
+    { inicial = new NodoMatriz("(0,0)"); }
+
 // Inserta un nuevo depto al final de la cabecera horizontal
 NodoMatriz* Matriz::insertarCabHorizontal(const std::string& depto) {
     NodoMatriz* nuevoDepto = new NodoMatriz(depto);

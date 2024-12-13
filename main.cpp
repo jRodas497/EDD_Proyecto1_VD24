@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <cctype>
 #include <random>
+
+#include "ListaTransaccion.h"
 #include "includes/Activo.h"
 #include "includes/Usuario.h"
 #include "includes/Matriz.h"
@@ -15,7 +17,11 @@
 NodoMatriz* usuarioLogueado = nullptr;
 
 Matriz* matriz = new Matriz();
+ListaTransaccion* transaccion = new ListaTransaccion();
+
 void mainMenu();
+void menuAdmin();
+void menuUser();
 
 bool obtenerOpcion(int& opcion) {
     std::cin >> opcion;
@@ -158,8 +164,10 @@ void registrarUsuario() {
     std::getline(std::cin, contra);
     std::cout << ">> Ingresar Departamento...: ";
     std::getline(std::cin, depto);
+    std::transform(depto.begin(), depto.end(), depto.begin(), ::tolower);
     std::cout << ">> Ingresar Company...: ";
     std::getline(std::cin, company);
+    std::transform(company.begin(), company.end(), company.begin(), ::tolower);
 
     std::cout << ">> Desea Agregar al Usuario al Final o al Inicio de la Lista de Usuarios? ";
     std::cout << "[f]/[i]" << std::endl;
@@ -178,50 +186,80 @@ void registrarUsuario() {
 }
 
 void reporteMatrizDispersa() {
-    std::cout << "\n>> Reporte de la Matriz Dispersa [Departamentos x Empresas] generado! \n";
     matriz -> reporteMatrizDispersa();
+    std::cout << "\n>> Reporte de la Matriz Dispersa [Departamentos x Company] generado! \n";
 }
 
 void reporteActivosDisponiblesDepto() {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string depto;
     std::cout << "\n>> Ingresar Departamento: ";
-    std::cin >> depto;
+    std::getline(std::cin, depto);
     std::transform(depto.begin(), depto.end(), depto.begin(), ::tolower);
-    //matrizDispersa.reporteActivosDisponiblesDepto(depto);
-    std::cout << ">> Reporte de Activos Disponibles de la Empresa generado!\n";
+
+    matriz->reporteActivosDepto(depto);
+
+    std::cout << ">> Reporte de Activos Disponibles de la Company generado!\n";
 }
 
 void reporteActivosDisponiblesEmpresa() {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string company;
-    std::cout << "\n>> Ingresar Empresa: ";
-    std::cin >> company;
+    std::cout << "\n>> Ingresar Company: ";
+    std::getline(std::cin, company);
     std::transform(company.begin(), company.end(), company.begin(), ::tolower);
-    //matrizDispersa.reporteActivosDisponiblesEmpresa(company);
-    std::cout << ">> Reporte de Activos Disponibles de la Empresa generado! \n";
+
+    matriz->reporteActivosCompany(company);
+
+    std::cout << ">> Reporte de Activos Disponibles de la Company generado! \n";
 }
 
 void reporteTransacciones() {
-    //arbolTransacciones.imprimirEnOrden();
     std::cout << "\n>> Reporte de Transacciones generado!\n";
+
+    transaccion->reporteTransacciones();
+
 }
 
 void reporteActivosUsuario() {
-    std::string user;
-    std::cout << "\n>> Ingresar Usuario: ";
-    std::cin >> user;
-    std::transform(user.begin(), user.end(), user.begin(), ::tolower);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::string usuario, depto, company;
+    std::cout << ">> Ingresar Usuario: ";
+    std::getline(std::cin, usuario);
+    std::cout << ">> Ingresar Depto:";
+    std::getline(std::cin, depto);
+    std::cout << ">> Ingresar Company:";
+    std::getline(std::cin, company);
+    //std::transform(user.begin(), user.end(), user.begin(), ::tolower);
 
-    //arbolUsuarios.reporteActivosUsuario(user);
+    NodoMatriz* auxiliar = matriz->existeEn(matriz->companyBuscar(company), depto);
+    if (auxiliar != nullptr) {
+        do {
+            if (auxiliar->getUsuario()->getUsuario() == usuario) {
+                auxiliar->getUsuario()->getArbol()->activosUsuario(auxiliar->getUsuario()->getArbol()->raiz, usuario);
+                break;
+            }
+            auxiliar = auxiliar->getAtras();
+        } while (auxiliar != nullptr);
+
+        if (auxiliar == nullptr) {
+            std::cout << "\nEl nombre del usuario está incorrecto..." << std::endl;
+            std::cin.ignore();
+        }
+    } else {
+        std::cout << "\nEl usuario no existe..." << std::endl;
+        std::cin.ignore();
+    }
     std::cout << ">> Reporte de Activos de Usuario generado!\n";
 }
 
 void activosRentadosUsuario() {
-    std::string user;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::string usuario;
     std::cout << "\n>> Ingresar Usuario: ";
-    std::cin >> user;
-    std::transform(user.begin(), user.end(), user.begin(), ::tolower);
+    std::getline(std::cin, usuario);
 
-    //arbolUsuarios.activosRentadosUsuario(user);
+    transaccion->reporteActivosRentadosUsuario(usuario);
     std::cout << ">> Reporte de Activos Rentados por Usuario generado!\n";
 }
 
@@ -231,8 +269,10 @@ void ordenarTransacciones() {
     std::cin >> orden;
     if (orden == 'a') {
         std::cout << " Orden de Transacciones Ascendente hecho! " << std::endl;
+        transaccion->reporteTransaccionesAscendente();
     } else if (orden == 'd') {
         std::cout << " Orden de Transacciones Descendente hecho! " << std::endl;
+        transaccion->reporteTransaccionesDescendente();
     } else {
         std::cout << "Por favor ingrese una opcion valida..." << std::endl;
     }
@@ -247,7 +287,7 @@ void menuAdmin() {
         std::cout <<   ">> %%% [1]. Registrar Usuario  " << std::endl;
         std::cout <<   ">> %%% [2]. Reporte (Graphviz) Matriz Dispersa  " << std::endl;
         std::cout <<   ">> %%% [3]. Reporte (Graphviz) Activos Disponibles de un Departamento  " << std::endl;
-        std::cout <<   ">> %%% [4]. Reporte (Graphviz) Activos Disponibles de una Empresa  " << std::endl;
+        std::cout <<   ">> %%% [4]. Reporte (Graphviz) Activos Disponibles de una Company  " << std::endl;
         std::cout <<   ">> %%% [5]. Reporte (Graphviz) Transacciones  " << std::endl;
         std::cout <<   ">> %%% [6]. Reporte Activos de un Usuario  " << std::endl;
         std::cout <<   ">> %%% [7]. Activos Rentados por un Usuario  " << std::endl; //Todos los activos que un usuario
@@ -274,10 +314,10 @@ void menuAdmin() {
                 reporteTransacciones();
                 break;
             case 6:
-                reporteActivosUsuario();
+                reporteActivosUsuario(); // Activos en general
                 break;
             case 7:
-                activosRentadosUsuario();
+                activosRentadosUsuario(); // Activos rentados para un usuario
                 break;
             case 8:
                 ordenarTransacciones();
@@ -294,22 +334,23 @@ void menuAdmin() {
 
 void login() {
     std::string usuario, contra, depto, company;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 
     std::cout << "\n>> %%%%%%%%%%%%%%%%%%%%%%%%%%% Renta de Activos %%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
     std::cout <<   ">> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Login %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" << std::endl;
 
     std::cout << ">> Ingresar Usuario... " << std::endl;
-    std::cin >> usuario;
-    std::transform(usuario.begin(), usuario.end(), usuario.begin(), ::tolower);
+    std::getline(std::cin, usuario);
+    //std::transform(usuario.begin(), usuario.end(), usuario.begin(), ::tolower);
 
     std::cout << ">> Ingresar Password... " << std::endl;;
-    std::cin >> contra;
-    std::transform(contra.begin(), contra.end(), contra.begin(), ::tolower);
+    std::getline(std::cin, contra);
+    //std::transform(contra.begin(), contra.end(), contra.begin(), ::tolower);
 
     if (usuario == "admin" && contra == "admin") {
         menuAdmin();
     } else {
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
 
         std::cout << ">> Ingresar Departamento... " << std::endl;;
         std::getline(std::cin, depto);
@@ -340,6 +381,7 @@ void login() {
 
 void mainMenu() {
     // Usuarios con el mismo departamento y empresa
+
     matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Juan Camanei", "juancho", "1111"), "guatemala", "usac", true);
     matriz->insertarUsuario(new Usuario("Tziquin Pashut", "tutsi", "tutsi"), "guatemala", "usac", false);
@@ -386,9 +428,11 @@ void mainMenu() {
         case 1:
             login();
             mainMenu();
+            break;
         case 2:
             std::cout << "\n>> Esperamos que vuelva pronto!!!" << std::endl;
             system(0);
+            break;
         default:
             std::cout << "\nPor favor escoja una de las opciones disponibles...\n";
     }

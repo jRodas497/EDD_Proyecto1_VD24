@@ -200,11 +200,14 @@ CMakeFiles/EDD.dir/main.cpp.o: \
  /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
  /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/ListaTransaccion.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/NodoTransaccion.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Transaccion.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Usuario.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/ArbolAVL.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/NodoAVL.h \
- /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Matriz.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/NodoMatriz.h \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Usuario.h

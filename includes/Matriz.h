@@ -37,6 +37,8 @@ public:
 
     // Funciones de reporte
     void reporteMatrizDispersa();
+    void reporteActivosDepto(const std::string& depto);
+    void reporteActivosCompany(const std::string& company);
 
 private:
     NodoMatriz* inicial;

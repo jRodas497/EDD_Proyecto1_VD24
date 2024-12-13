@@ -14,6 +14,12 @@ set(SOURCES
         src/ArbolAVL.cpp
         includes/NodoAVL.h
         src/NodoAVL.cpp
+        includes/ListaTransaccion.h
+        src/ListaTransaccion.cpp
+        includes/Transaccion.h
+        src/Transaccion.cpp
+        includes/NodoTransaccion.h
+        src/NodoTransaccion.cpp
 )
 
 # Add executable

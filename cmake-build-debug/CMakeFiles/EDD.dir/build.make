@@ -167,6 +167,48 @@ CMakeFiles/EDD.dir/src/NodoAVL.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EDD.dir/src/NodoAVL.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/NodoAVL.cpp" -o CMakeFiles/EDD.dir/src/NodoAVL.cpp.s
 
+CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o: CMakeFiles/EDD.dir/flags.make
+CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o: /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/src/ListaTransaccion.cpp
+CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o: CMakeFiles/EDD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o -MF CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o.d -o CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o -c "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/ListaTransaccion.cpp"
+
+CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/ListaTransaccion.cpp" > CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.i
+
+CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/ListaTransaccion.cpp" -o CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.s
+
+CMakeFiles/EDD.dir/src/Transaccion.cpp.o: CMakeFiles/EDD.dir/flags.make
+CMakeFiles/EDD.dir/src/Transaccion.cpp.o: /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/src/Transaccion.cpp
+CMakeFiles/EDD.dir/src/Transaccion.cpp.o: CMakeFiles/EDD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/EDD.dir/src/Transaccion.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EDD.dir/src/Transaccion.cpp.o -MF CMakeFiles/EDD.dir/src/Transaccion.cpp.o.d -o CMakeFiles/EDD.dir/src/Transaccion.cpp.o -c "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/Transaccion.cpp"
+
+CMakeFiles/EDD.dir/src/Transaccion.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EDD.dir/src/Transaccion.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/Transaccion.cpp" > CMakeFiles/EDD.dir/src/Transaccion.cpp.i
+
+CMakeFiles/EDD.dir/src/Transaccion.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EDD.dir/src/Transaccion.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/Transaccion.cpp" -o CMakeFiles/EDD.dir/src/Transaccion.cpp.s
+
+CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o: CMakeFiles/EDD.dir/flags.make
+CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o: /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/src/NodoTransaccion.cpp
+CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o: CMakeFiles/EDD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o -MF CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o.d -o CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o -c "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/NodoTransaccion.cpp"
+
+CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/NodoTransaccion.cpp" > CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.i
+
+CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/src/NodoTransaccion.cpp" -o CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.s
+
 # Object files for target EDD
 EDD_OBJECTS = \
 "CMakeFiles/EDD.dir/main.cpp.o" \
@@ -175,7 +217,10 @@ EDD_OBJECTS = \
 "CMakeFiles/EDD.dir/src/NodoMatriz.cpp.o" \
 "CMakeFiles/EDD.dir/src/Activo.cpp.o" \
 "CMakeFiles/EDD.dir/src/ArbolAVL.cpp.o" \
-"CMakeFiles/EDD.dir/src/NodoAVL.cpp.o"
+"CMakeFiles/EDD.dir/src/NodoAVL.cpp.o" \
+"CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o" \
+"CMakeFiles/EDD.dir/src/Transaccion.cpp.o" \
+"CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o"
 
 # External object files for target EDD
 EDD_EXTERNAL_OBJECTS =
@@ -187,9 +232,12 @@ EDD: CMakeFiles/EDD.dir/src/NodoMatriz.cpp.o
 EDD: CMakeFiles/EDD.dir/src/Activo.cpp.o
 EDD: CMakeFiles/EDD.dir/src/ArbolAVL.cpp.o
 EDD: CMakeFiles/EDD.dir/src/NodoAVL.cpp.o
+EDD: CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o
+EDD: CMakeFiles/EDD.dir/src/Transaccion.cpp.o
+EDD: CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o
 EDD: CMakeFiles/EDD.dir/build.make
 EDD: CMakeFiles/EDD.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable EDD"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/Usuario/Desktop/Proyectos CLion/EDD/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable EDD"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EDD.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

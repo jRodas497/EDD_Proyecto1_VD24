@@ -201,6 +201,30 @@ src/ArbolAVL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ArbolAVL.cpp.s
 .PHONY : src/ArbolAVL.cpp.s
 
+src/ListaTransaccion.o: src/ListaTransaccion.cpp.o
+.PHONY : src/ListaTransaccion.o
+
+# target to build an object file
+src/ListaTransaccion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.o
+.PHONY : src/ListaTransaccion.cpp.o
+
+src/ListaTransaccion.i: src/ListaTransaccion.cpp.i
+.PHONY : src/ListaTransaccion.i
+
+# target to preprocess a source file
+src/ListaTransaccion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.i
+.PHONY : src/ListaTransaccion.cpp.i
+
+src/ListaTransaccion.s: src/ListaTransaccion.cpp.s
+.PHONY : src/ListaTransaccion.s
+
+# target to generate assembly for a file
+src/ListaTransaccion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/ListaTransaccion.cpp.s
+.PHONY : src/ListaTransaccion.cpp.s
+
 src/Matriz.o: src/Matriz.cpp.o
 .PHONY : src/Matriz.o
 
@@ -273,6 +297,54 @@ src/NodoMatriz.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoMatriz.cpp.s
 .PHONY : src/NodoMatriz.cpp.s
 
+src/NodoTransaccion.o: src/NodoTransaccion.cpp.o
+.PHONY : src/NodoTransaccion.o
+
+# target to build an object file
+src/NodoTransaccion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.o
+.PHONY : src/NodoTransaccion.cpp.o
+
+src/NodoTransaccion.i: src/NodoTransaccion.cpp.i
+.PHONY : src/NodoTransaccion.i
+
+# target to preprocess a source file
+src/NodoTransaccion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.i
+.PHONY : src/NodoTransaccion.cpp.i
+
+src/NodoTransaccion.s: src/NodoTransaccion.cpp.s
+.PHONY : src/NodoTransaccion.s
+
+# target to generate assembly for a file
+src/NodoTransaccion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/NodoTransaccion.cpp.s
+.PHONY : src/NodoTransaccion.cpp.s
+
+src/Transaccion.o: src/Transaccion.cpp.o
+.PHONY : src/Transaccion.o
+
+# target to build an object file
+src/Transaccion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/Transaccion.cpp.o
+.PHONY : src/Transaccion.cpp.o
+
+src/Transaccion.i: src/Transaccion.cpp.i
+.PHONY : src/Transaccion.i
+
+# target to preprocess a source file
+src/Transaccion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/Transaccion.cpp.i
+.PHONY : src/Transaccion.cpp.i
+
+src/Transaccion.s: src/Transaccion.cpp.s
+.PHONY : src/Transaccion.s
+
+# target to generate assembly for a file
+src/Transaccion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDD.dir/build.make CMakeFiles/EDD.dir/src/Transaccion.cpp.s
+.PHONY : src/Transaccion.cpp.s
+
 src/Usuario.o: src/Usuario.cpp.o
 .PHONY : src/Usuario.o
 
@@ -315,6 +387,9 @@ help:
 	@echo "... src/ArbolAVL.o"
 	@echo "... src/ArbolAVL.i"
 	@echo "... src/ArbolAVL.s"
+	@echo "... src/ListaTransaccion.o"
+	@echo "... src/ListaTransaccion.i"
+	@echo "... src/ListaTransaccion.s"
 	@echo "... src/Matriz.o"
 	@echo "... src/Matriz.i"
 	@echo "... src/Matriz.s"
@@ -324,6 +399,12 @@ help:
 	@echo "... src/NodoMatriz.o"
 	@echo "... src/NodoMatriz.i"
 	@echo "... src/NodoMatriz.s"
+	@echo "... src/NodoTransaccion.o"
+	@echo "... src/NodoTransaccion.i"
+	@echo "... src/NodoTransaccion.s"
+	@echo "... src/Transaccion.o"
+	@echo "... src/Transaccion.i"
+	@echo "... src/Transaccion.s"
 	@echo "... src/Usuario.o"
 	@echo "... src/Usuario.i"
 	@echo "... src/Usuario.s"

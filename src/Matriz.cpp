@@ -532,6 +532,7 @@ void Matriz::deptoCompanyMid(NodoMatriz* deptoNodo, NodoMatriz* companyNodo, Nod
  [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[      FUNCIONES DE REPORTE      ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
  ===================================================================================================================
  */
+// Reporte de Matriz Dispersa
 void Matriz::reporteMatrizDispersa() {
     NodoMatriz* aux = inicial;
     NodoMatriz* aux2 = nullptr;
@@ -667,6 +668,67 @@ void Matriz::reporteMatrizDispersa() {
     system("dot -Tpng ../Graficas/reporteMatrizDispersa.txt -o ../Graficas/reporteMatrizDispersa.png");
 
 }
+// Reporte de Activos de un Depto
+void Matriz::reporteActivosDepto(const std::string& depto) {
+    std::string dot = "digraph{ \nrankdir = TB;\nnode[shape = box, color = red]\n" + depto + "\n";
+    NodoMatriz* deptoNodo = deptoBuscar(depto);
+    if (deptoNodo == nullptr) {
+        std::cout << "Departamento no encontrado." << std::endl;
+        return;
+    }
+    NodoMatriz* aux = deptoNodo->getAbajo();
+    NodoMatriz* aux2;
+    while (aux != nullptr) {
+        aux2 = aux;
+        while (aux2 != nullptr) {
+            dot += "node[shape = box];\n " + aux2->getUsuario()->getUsuario() + ";\n node[shape = circle]; \n";
+            dot += aux2->getUsuario()->getArbol()->activosUsuarioPre(aux2->getUsuario()->getArbol()->raiz, dot);
+            aux2 = aux2->getAtras();
+        }
+        aux = aux->getAbajo();
+    }
+    dot += "\n}";
+
+    std::ofstream file;
+    file.open("../Graficas/reporteActivosDepto.txt");
+    if (file.is_open()) {
+        file << dot;
+        file.close();
+    }
+
+    system("dot -Tpng ../Graficas/reporteActivosDepto.txt -o ../Graficas/reporteActivosDepto.png");
+}
+// Reporte de Activos de una Company
+void Matriz::reporteActivosCompany(const std::string& empresa) {
+    std::string dot = "digraph{ \nrankdir = TB;\nnode[shape = box, color = red]\n" + empresa + "\n";
+    NodoMatriz* nodoEmpresa = companyBuscar(empresa);
+    if (nodoEmpresa == nullptr) {
+        std::cout << "Company no encontrada." << std::endl;
+        return;
+    }
+    NodoMatriz* aux = nodoEmpresa->getDerecha();
+    NodoMatriz* aux2;
+    while (aux != nullptr) {
+        aux2 = aux;
+        while (aux2 != nullptr) {
+            dot += "node[shape = box];\n " + aux2->getUsuario()->getUsuario() + ";\n node[shape = circle]; \n";
+            dot += aux2->getUsuario()->getArbol()->activosUsuarioPre(aux2->getUsuario()->getArbol()->raiz, dot);
+            aux2 = aux2->getAtras();
+        }
+        aux = aux->getDerecha();
+    }
+    dot += "\n}";
+
+    std::ofstream file;
+    file.open("../Graficas/reporteActivosCompany.txt");
+    if (file.is_open()) {
+        file << dot;
+        file.close();
+    }
+
+    system("dot -Tpng ../Graficas/reporteActivosCompany.txt -o ../Graficas/reporteActivosCompany.png");
+}
+
 // Lista los usuarios de un depto y una company
 void Matriz::listarUsuarios(const std::string& depto, const std::string& company) {
     NodoMatriz* deptoNodo = deptoBuscar(depto);

@@ -47,6 +47,76 @@ std::string randomID() {
     return randomID;
 }
 
+void iniciarDatos() {
+    static bool datosCargados = false;
+    if (datosCargados) {
+        return;
+    }
+    datosCargados = true;
+
+        // Activos
+    Usuario* u1 = new Usuario("Pedro Perez", "pperez", "peres");
+    Usuario* u2 = new Usuario("Juan Camanei", "juancho", "1111");
+    Usuario* u3 = new Usuario("Tziquin Pashut", "tutsi", "tutsi");
+    Usuario* u4 = new Usuario("Juan Rodas", "jrodas", "1234");
+
+    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID()));
+    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID()));
+
+    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID()));
+    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID()));
+
+    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID()));
+
+    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID()));
+    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID()));
+    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID()));
+
+    // Usuarios con el mismo departamento y empresa
+    matriz->insertarUsuario(u1, "guatemala", "usac", true);
+    matriz->insertarUsuario(u2, "guatemala", "usac", true);
+    matriz->insertarUsuario(u3, "guatemala", "usac", false);
+    matriz->insertarUsuario(u4, "guatemala", "usac", false);
+
+                //matriz->listarUsuarios("guatemala", "usac");
+    matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
+    matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "santa rosa", "twitch", false);
+    matriz->insertarUsuario(new Usuario("Eva Davis", "rocinante", "pass5"), "santa rosa", "twitch", false);
+                //matriz->listarUsuarios("santa rosa", "twitch");
+    matriz->insertarUsuario(new Usuario("Marco Tulio", "mt", "pass"), "santa rosa", "usac", false);
+                //matriz->listarUsuarios("santa rosa", "usac");
+    matriz->insertarUsuario(new Usuario("Juan Carlos", "carlos", "pass"), "guatemala", "twitch", false);
+                //matriz->listarUsuarios("guatemala", "twitch");
+    matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
+    matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "vcorp", true);
+    matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
+                //matriz->listarUsuarios("santa rosa", "irtra");
+    matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "jalapa", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "chimaltenango", "bigmc", true);
+    // Usuarios con el mismo departamento pero diferente empresa al final
+    matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "baja verapaz", "bigmc", false);
+    matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "baja verapaz", "bigmc", false);
+                //matriz->listarUsuariosPorDepto("baja verapaz");
+    // Usuarios con el mismo empresa pero diferente departamento al final
+    matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "escuintla", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "huehuetenango", "bigmc", true);
+    matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "retalhuleu", "bigmc", false);
+            //matriz->listarUsuariosPorCompany("company11");
+}
+
 /*
  ===================================================================================================================
  [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[     FUNCIONES DE MENU USUARIO      ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -362,17 +432,17 @@ void login() {
         //volver en minus para no tener IGSS/igss/Igss/iGsS
         std::transform(company.begin(), company.end(), company.begin(), ::tolower);
 
-        NodoMatriz* nodoUsuario = matriz->existeEn(matriz->deptoBuscar(depto), company);
+        NodoMatriz *nodoUsuario = matriz->existeEn(matriz->deptoBuscar(depto), company);
 
         if (nodoUsuario != nullptr) {
-            do {
+            while (nodoUsuario != nullptr) {
                 if ((nodoUsuario->getUsuario()->getUsuario() == usuario) && (nodoUsuario->getUsuario()->getContra() == contra)) {
                     std::cout << "\n>> Bienvenido " << usuario << "!" << std::endl;
                     usuarioLogueado = nodoUsuario;
                     menuUsuario(usuarioLogueado->getUsuario()->getNombre());
                 }
                 nodoUsuario = nodoUsuario->getAtras();
-            } while (nodoUsuario != nullptr);
+            }
         } else {
             std::cout << "\n>> Usuario no encontrado en la base de datos..." << std::endl;
             mainMenu();
@@ -381,67 +451,7 @@ void login() {
 }
 
 void mainMenu() {
-    // Activos
-    Usuario* u1 = new Usuario("Pedro Perez", "pperez", "peres");
-    Usuario* u2 = new Usuario("Juan Camanei", "juancho", "1111");
-    Usuario* u3 = new Usuario("Tziquin Pashut", "tutsi", "tutsi");
-    Usuario* u4 = new Usuario("Juan Rodas", "jrodas", "1234");
-
-    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID()));
-    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID()));
-
-    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID()));
-    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID()));
-
-    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID()));
-    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID()));
-    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID()));
-    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID()));
-
-    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID()));
-    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID()));
-    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID()));
-
-    // Usuarios con el mismo departamento y empresa
-    matriz->insertarUsuario(u1, "guatemala", "usac", true);
-    matriz->insertarUsuario(u2, "guatemala", "usac", true);
-    matriz->insertarUsuario(u3, "guatemala", "usac", false);
-    matriz->insertarUsuario(u4, "guatemala", "usac", false);
-
-                //matriz->listarUsuarios("guatemala", "usac");
-    matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
-    matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "santa rosa", "twitch", false);
-    matriz->insertarUsuario(new Usuario("Eva Davis", "rocinante", "pass5"), "santa rosa", "twitch", false);
-                //matriz->listarUsuarios("santa rosa", "twitch");
-    matriz->insertarUsuario(new Usuario("Marco Tulio", "mt", "pass"), "santa rosa", "usac", false);
-                //matriz->listarUsuarios("santa rosa", "usac");
-    matriz->insertarUsuario(new Usuario("Juan Carlos", "carlos", "pass"), "guatemala", "twitch", false);
-                //matriz->listarUsuarios("guatemala", "twitch");
-    matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
-    matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "vcorp", true);
-    matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
-                //matriz->listarUsuarios("santa rosa", "irtra");
-    matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "jalapa", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "chimaltenango", "bigmc", true);
-    // Usuarios con el mismo departamento pero diferente empresa al final
-    matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "baja verapaz", "bigmc", false);
-    matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "baja verapaz", "bigmc", false);
-                //matriz->listarUsuariosPorDepto("baja verapaz");
-    // Usuarios con el mismo empresa pero diferente departamento al final
-    matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "escuintla", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "huehuetenango", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "retalhuleu", "bigmc", false);
-            //matriz->listarUsuariosPorCompany("company11");
+    iniciarDatos();
 
     int opcion = 0;
 

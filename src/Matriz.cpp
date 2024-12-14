@@ -205,36 +205,50 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
             companyNodo = insertarCabVertical(company);
             deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
-        // caso 7: Depto y company en medio
-        else if (deptoNodo !=deptoUltimo() && companyNodo != companyUltimo()) {
-            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
-        }
-    }
-    // Caso 8: Si ya existen ambas cabeceras
-    else if (deptoNodo != nullptr && companyNodo != nullptr)  {
+    // Caso 7: Si ya existen ambas cabeceras
+    } else if (deptoNodo != nullptr && companyNodo != nullptr) {
         NodoMatriz* nodoExistente = existeEn(deptoNodo, company);
-        // Si ya existe un usuario en la posición [Depto x Company]
-        if (nodoExistente != nullptr) {
-            // Si el usuario ya existe en la posición [Depto x Company]
+
+        if (existeEn(deptoNodo, company)) {
             if (existenUsuarios(nodoExistente, usuarioNuevo->getUsuario())) {
-                std::cout << "El usuario ya existe en [" << deptoNodo->getCabecera() << "x" << companyNodo->getCabecera() << "]" << std::endl;
+                std::cout << "El usuario: " << usuarioNuevo->getUsuario() << ", ya existe en [" << deptoNodo->getCabecera() << "x" << companyNodo->getCabecera() << "]" << std::endl;
             } else {
                 NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
                 if (insertarAtras) {
-                    // Insertar al final
                     while (nodoExistente->getAtras() != nullptr) {
                         nodoExistente = nodoExistente->getAtras();
                     }
                     nodoExistente->setAtras(nuevoUsuario);
                     nuevoUsuario->setDelante(nodoExistente);
                 } else {
-                    // Insertar al inicio
                     nuevoUsuario->setAtras(nodoExistente);
                     nodoExistente->setDelante(nuevoUsuario);
+                    // Heredar relaciones de nodoExistente
+                    // Actualizar relaciones de los nodos vecinos
+                    if (nodoExistente->getArriba() != nullptr) {
+                        nuevoUsuario->setArriba(nodoExistente->getArriba());
+                        nodoExistente->getArriba()->setAbajo(nuevoUsuario);
+                    }
+                    if (nodoExistente->getAbajo() != nullptr) {
+                        nuevoUsuario->setAbajo(nodoExistente->getAbajo());
+                        nodoExistente->getAbajo()->setArriba(nuevoUsuario);
+                    }
+                    if (nodoExistente->getDerecha() != nullptr) {
+                        nuevoUsuario->setDerecha(nodoExistente->getDerecha());
+                        nodoExistente->getDerecha()->setIzquierda(nuevoUsuario);
+                    }
+                    if (nodoExistente->getIzquierda() != nullptr) {
+                        nuevoUsuario->setIzquierda(nodoExistente->getIzquierda());
+                        nodoExistente->getIzquierda()->setDerecha(nuevoUsuario);
+                    }
+
+                    // Volver relaciones de nodoExistente como nulas
+                    nodoExistente->setArriba(nullptr);
+                    nodoExistente->setAbajo(nullptr);
+                    nodoExistente->setDerecha(nullptr);
+                    nodoExistente->setIzquierda(nullptr);
                 }
             }
-        // Si no existe un usuario en la posición [Depto x Company]
         } else {
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
             deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);

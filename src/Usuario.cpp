@@ -9,7 +9,7 @@ int::Usuario::nextId = 1;
 
 
 Usuario::Usuario(const std::string& nombre, const std::string& usuario, const std::string& contra)
-    : id(nextId++), nombre(nombre), usuario(usuario), contra(contra), arbolActivos(nullptr) {
+    : id(nextId++), nombre(nombre), usuario(usuario), contra(contra), arbolActivos(new ArbolAVL()) {
 }
 
 // getters

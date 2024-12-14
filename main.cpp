@@ -362,16 +362,17 @@ void login() {
         //volver en minus para no tener IGSS/igss/Igss/iGsS
         std::transform(company.begin(), company.end(), company.begin(), ::tolower);
 
-        NodoMatriz *nodoUsuario = matriz->existeEn(matriz->deptoBuscar(depto), company);
+        NodoMatriz* nodoUsuario = matriz->existeEn(matriz->deptoBuscar(depto), company);
+
         if (nodoUsuario != nullptr) {
-            while (nodoUsuario != nullptr) {
+            do {
                 if ((nodoUsuario->getUsuario()->getUsuario() == usuario) && (nodoUsuario->getUsuario()->getContra() == contra)) {
                     std::cout << "\n>> Bienvenido " << usuario << "!" << std::endl;
                     usuarioLogueado = nodoUsuario;
                     menuUsuario(usuarioLogueado->getUsuario()->getNombre());
                 }
                 nodoUsuario = nodoUsuario->getAtras();
-            }
+            } while (nodoUsuario != nullptr);
         } else {
             std::cout << "\n>> Usuario no encontrado en la base de datos..." << std::endl;
             mainMenu();
@@ -380,12 +381,38 @@ void login() {
 }
 
 void mainMenu() {
-    // Usuarios con el mismo departamento y empresa
+    // Activos
+    Usuario* u1 = new Usuario("Pedro Perez", "pperez", "peres");
+    Usuario* u2 = new Usuario("Juan Camanei", "juancho", "1111");
+    Usuario* u3 = new Usuario("Tziquin Pashut", "tutsi", "tutsi");
+    Usuario* u4 = new Usuario("Juan Rodas", "jrodas", "1234");
 
-    matriz->insertarUsuario(new Usuario("Pedro Perez", "pperez", "peres"), "guatemala", "usac", true);
-    matriz->insertarUsuario(new Usuario("Juan Camanei", "juancho", "1111"), "guatemala", "usac", true);
-    matriz->insertarUsuario(new Usuario("Tziquin Pashut", "tutsi", "tutsi"), "guatemala", "usac", false);
-    matriz->insertarUsuario(new Usuario("Juan Rodas", "jrodas", "1234"), "guatemala", "usac", false);
+    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID()));
+    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID()));
+
+    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID()));
+    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID()));
+
+    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID()));
+
+    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID()));
+    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID()));
+    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID()));
+
+    // Usuarios con el mismo departamento y empresa
+    matriz->insertarUsuario(u1, "guatemala", "usac", true);
+    matriz->insertarUsuario(u2, "guatemala", "usac", true);
+    matriz->insertarUsuario(u3, "guatemala", "usac", false);
+    matriz->insertarUsuario(u4, "guatemala", "usac", false);
 
                 //matriz->listarUsuarios("guatemala", "usac");
     matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
@@ -414,7 +441,7 @@ void mainMenu() {
     matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "escuintla", "bigmc", true);
     matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "huehuetenango", "bigmc", true);
     matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "retalhuleu", "bigmc", false);
-    //matriz->listarUsuariosPorCompany("company11");
+            //matriz->listarUsuariosPorCompany("company11");
 
     int opcion = 0;
 

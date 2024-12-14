@@ -15,6 +15,7 @@ void ArbolAVL::insertar(Activo* activo) {
 // Incersión de forma recursiva
 void ArbolAVL::insertar(Activo* activo, NodoAVL*& raiz) {
     if (raiz != nullptr) {
+
         if (activo->getId() > raiz->getActivo()->getId()) {
             if (raiz->getHijoDer() != nullptr) {
                 insertar(activo, raiz->getHijoDer());

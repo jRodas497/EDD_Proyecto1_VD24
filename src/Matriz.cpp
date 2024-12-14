@@ -210,21 +210,48 @@ void Matriz::insertarUsuario(Usuario* usuarioNuevo, const std::string& depto, co
             NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
             deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
         }
-    }     else if (deptoNodo != nullptr && companyNodo != nullptr)  {
-        // Caso 8: Si ya existen ambas cabeceras
-        NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
-        deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
+    }
+    // Caso 8: Si ya existen ambas cabeceras
+    else if (deptoNodo != nullptr && companyNodo != nullptr)  {
+        NodoMatriz* nodoExistente = existeEn(deptoNodo, company);
+        // Si ya existe un usuario en la posición [Depto x Company]
+        if (nodoExistente != nullptr) {
+            // Si el usuario ya existe en la posición [Depto x Company]
+            if (existenUsuarios(nodoExistente, usuarioNuevo->getUsuario())) {
+                std::cout << "El usuario ya existe en [" << deptoNodo->getCabecera() << "x" << companyNodo->getCabecera() << "]" << std::endl;
+            } else {
+                NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+                if (insertarAtras) {
+                    // Insertar al final
+                    while (nodoExistente->getAtras() != nullptr) {
+                        nodoExistente = nodoExistente->getAtras();
+                    }
+                    nodoExistente->setAtras(nuevoUsuario);
+                    nuevoUsuario->setDelante(nodoExistente);
+                } else {
+                    // Insertar al inicio
+                    nuevoUsuario->setAtras(nodoExistente);
+                    nodoExistente->setDelante(nuevoUsuario);
+                }
+            }
+        // Si no existe un usuario en la posición [Depto x Company]
+        } else {
+            NodoMatriz* nuevoUsuario = new NodoMatriz(usuarioNuevo);
+            deptoCompanyMid(deptoNodo, companyNodo, nuevoUsuario);
+        }
     }
 }
 // Comprueba si el usuario ya existe en esa posición [Depto x Company]
 bool Matriz::existenUsuarios(NodoMatriz* nodoUser, const std::string& usuario) {
     NodoMatriz* aux = nodoUser;
 
-    while (aux->getAtras() != nullptr) {
-        if (aux->getAtras()->getUsuario()->getUsuario() == usuario) {
-            return true;
+    if (aux != nullptr) {
+        while (aux != nullptr) {
+            if (aux->getUsuario()->getUsuario() == usuario) {
+                return true;
+            }
+            aux = aux->getAtras();
         }
-        aux = aux->getAtras();
     }
 
     return false;

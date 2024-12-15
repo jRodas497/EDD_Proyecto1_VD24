@@ -61,8 +61,8 @@ void ArbolAVL::eliminar(const std::string& id) {
         // Suprimir el nodo del árbol
         raiz = eliminar(id, raiz);
         if (raiz != nullptr) {
-            std::cout << "\nActivo Suprimido" << std::endl << " / ID: " << idEliminado << std::endl;
-            std::cout << "Nombre: " << nombre << std::endl << "Descripcion: " << descripcion << std::endl;
+            std::cout << "\nActivo Suprimido:)" << std::endl << " / ID: " << idEliminado << std::endl;
+            std::cout << "  / Nombre: " << nombre << std::endl << "   / Descripcion: " << descripcion << std::endl;
         }
     } else {
         std::cout << "\nEl activo no existe...";
@@ -270,6 +270,19 @@ void ArbolAVL::preOrden(NodoAVL* nodo, bool bandera) {
         preOrden(nodo->getHijoIzq(), bandera);
         // Recorrer el subárbol derecho
         preOrden(nodo->getHijoDer(), bandera);
+    }
+}
+// Listar en consola los activos (en general) de un usuario
+void ArbolAVL::listarActivosUsuario(const std::string& usuario) {
+    listarActivosUsuario(raiz, usuario);
+}
+void ArbolAVL::listarActivosUsuario(NodoAVL* nodo, const std::string& usuario) {
+    if (nodo != nullptr) {
+        if (nodo->getActivo()->getUsuario() == usuario) {
+            std::cout << "ID: " << nodo->getActivo()->getId() << ", Nombre: " << nodo->getActivo()->getNombre() << ", Descripción: " << nodo->getActivo()->getDescripcion() << std::endl;
+        }
+        listarActivosUsuario(nodo->getHijoIzq(), usuario);
+        listarActivosUsuario(nodo->getHijoDer(), usuario);
     }
 }
 

@@ -60,26 +60,26 @@ void iniciarDatos() {
     Usuario* u3 = new Usuario("Tziquin Pashut", "tutsi", "tutsi");
     Usuario* u4 = new Usuario("Juan Rodas", "jrodas", "1234");
 
-    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID()));
-    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID()));
-    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID()));
+    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID(), (u1->getUsuario())));
 
-    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID()));
-    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID()));
+    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID(), (u2->getUsuario())));
+    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID(), (u2->getUsuario())));
 
-    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID()));
-    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID()));
-    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID()));
-    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID()));
+    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID(), (u3->getUsuario())));
+    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID(), (u3->getUsuario())));
+    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID(), (u3->getUsuario())));
+    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID(), (u3->getUsuario())));
 
-    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID()));
-    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID()));
-    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID()));
+    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID(), (u4->getUsuario())));
+    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID(), (u4->getUsuario())));
+    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID(), (u4->getUsuario())));
 
     // Usuarios con el mismo departamento y empresa
     matriz->insertarUsuario(u1, "guatemala", "usac", true);
@@ -132,17 +132,25 @@ void agregarActivo() {
     std::cout << ">> Ingresar Descripcion...: ";
     std::cin >> descripcion;
 
-    //Activo* nuevoActivo = new Activo(nombre, descripcion, idAlfa);
-    //arbolActivos.insertar(nuevoActivo);
+    usuarioLogueado->getUsuario()->getArbol()->insertar(new Activo(nombre, descripcion, idAlfa, (usuarioLogueado->getUsuario()->getUsuario()) ));
+    std::cout << "USUARIO: " << usuarioLogueado->getUsuario()->getUsuario() << std::endl;
     std::cout << "Nombre: " << nombre << " | Descripcion: " << descripcion << " | ID(15): " << idAlfa  << std::endl;
 }
 
 void eliminarActivo() {
-    int id;
-    std::cout << ">> Ingresar ID del activo a eliminar: ";
-    if (!obtenerOpcion(id)) return;
+    std::cin.ignore();
+    if (!usuarioLogueado->getUsuario()->getArbol()->raiz) {
+        std::cout << "No hay activos para eliminar..." << std::endl;
+        return;
+    }
 
-    //arbolActivos.eliminar(id);
+    usuarioLogueado->getUsuario()->getArbol()->listarActivosUsuario(usuarioLogueado->getUsuario()->getUsuario());
+    std::string id;
+    std::cout << ">> Ingresar ID del activo a eliminar: ";
+    std::getline(std::cin, id);
+
+    usuarioLogueado->getUsuario()->getArbol()->eliminar(id);
+    std::cout << "Activo eliminado! \n" << std::endl;
 }
 
 void modificarActivo() {
@@ -176,7 +184,7 @@ void menuUsuario(const std::string& user) {
     int opcion;
 
     while (menu) {
-        std::cout << ">> ==================== " << user << " ====================" << std::endl;
+        std::cout << ">> ==================== " << usuarioLogueado->getUsuario()->getNombre() << " ====================" << std::endl;
         std::cout << ">> ### [1]. Agregar Activo" << std::endl;
         std::cout << ">> ### [2]. Eliminar Activo" << std::endl;
         std::cout << ">> ### [3]. Modificar Activo" << std::endl;

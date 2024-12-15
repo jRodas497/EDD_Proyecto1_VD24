@@ -3,10 +3,9 @@
 //
 #include "../includes/Activo.h"
 
-Activo::Activo(const std::string& nombre, const std::string& descripcion, const std::string& id)
-    : nombre(nombre), descripcion(descripcion), id(id), rentado(false){
+Activo::Activo(const std::string& nombre, const std::string& descripcion, const std::string& id, const std::string& usuario)
+    : nombre(nombre), descripcion(descripcion), id(id), rentado(false), usuario(usuario) {
 }
-
 // getters
 const std::string& Activo::getId() {
     return id;
@@ -24,6 +23,10 @@ bool Activo::getRentado() {
     return rentado;
 }
 
+const std::string& Activo::getUsuario() {
+    return usuario;
+}
+
 // setters
 void Activo::setId(const std::string& id) {
     this->id = id;
@@ -39,4 +42,8 @@ void Activo::setDescripcion(const std::string& descripcion) {
 
 void Activo::setRentado(bool rentado) {
     this->rentado = rentado;
+}
+
+void Activo::setUsuario(const std::string& usuario) {
+    this->usuario = usuario;
 }

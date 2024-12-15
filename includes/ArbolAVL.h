@@ -39,6 +39,8 @@ public:
     // Funciones de impresión
     bool preOrden(bool bandera);
     void preOrden(NodoAVL* nodo, bool bandera);
+    void listarActivosUsuario(const std::string& usuario);
+    void listarActivosUsuario(NodoAVL* nodo, const std::string& usuario);
 
     // Funciones de altura
     int altoDer(NodoAVL* der);

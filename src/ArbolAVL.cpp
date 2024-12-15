@@ -61,8 +61,8 @@ void ArbolAVL::eliminar(const std::string& id) {
         // Suprimir el nodo del árbol
         raiz = eliminar(id, raiz);
         if (raiz != nullptr) {
-            std::cout << "\nActivo Suprimido:)" << std::endl << " / ID: " << idEliminado << std::endl;
-            std::cout << "  / Nombre: " << nombre << std::endl << "   / Descripcion: " << descripcion << std::endl;
+            std::cout << "\nActivo Suprimido: " << std::endl << " / ID: " << idEliminado << std::endl;
+            std::cout << "  / Nombre: " << nombre << std::endl << "   / Descripcion: " << descripcion  << "\n" << std::endl;
         }
     } else {
         std::cout << "\nEl activo no existe...";
@@ -148,8 +148,8 @@ bool ArbolAVL::modificarActivo(const std::string& id, const std::string& descrip
     if (activo != nullptr) {
         // Actualizar la descripción del activo
         activo->getActivo()->setDescripcion(descripcion);
-        std::cout << "\nActivo Modificado:" << std::endl << "ID = " << activo->getActivo()->getId() << std::endl;
-        std::cout << "Nombre = " << activo->getActivo()->getNombre() << std::endl << "Descripción = " << activo->getActivo()->getDescripcion() << std::endl;
+        std::cout << "\nActivo Modificado:" << std::endl << " / ID = " << activo->getActivo()->getId() << std::endl;
+        std::cout << "  / Nombre = " << activo->getActivo()->getNombre() << std::endl << "   / Descripción = " << activo->getActivo()->getDescripcion() << "\n" << std::endl;
         return true;
     }
     return false;

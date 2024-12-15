@@ -829,6 +829,42 @@ void Matriz::listarUsuariosPorDepto(const std::string& depto) {
         usuariosNodo = usuariosNodo->getAbajo();
     }
 }
+// Lista los activos de un usuario
+NodoAVL* Matriz::listadoActivos(Usuario* usuario, bool bandera, std::string id) {
+    if (inicial->getAbajo() != nullptr) {
+        return listadoActivos(usuario, inicial->getAbajo(), bandera, id);
+    }
+    return nullptr; // Retornar nullptr si no hay más nodos abajo
+}
+// Lista los activos de un usuario [Recursivo]
+NodoAVL* Matriz::listadoActivos(Usuario* usuario, NodoMatriz* start, bool bandera, std::string id) {
+    NodoMatriz* aux = start;
+    NodoMatriz* aux2;
+
+    if (aux != nullptr) {
+        while (aux->getDerecha() != nullptr) {
+            aux = aux->getDerecha();
+            aux2 = aux;
+            do {
+                if (aux2->getUsuario() != usuario) {
+                    if (bandera) {
+                        aux2->getUsuario()->getArbol()->preOrden(true);
+                    } else {
+                        NodoAVL* activoRentado = aux2->getUsuario()->getArbol()->buscar(id, aux2->getUsuario()->getArbol()->raiz);
+                        if (activoRentado != nullptr) {
+                            return activoRentado;
+                        }
+                    }
+                }
+                aux2 = aux2->getAtras();
+            } while (aux2 != nullptr);
+        }
+        return listadoActivos(usuario, start->getAbajo(), bandera, id);
+    }
+    // Retornar nullptr si no hay más nodos
+    return nullptr;
+}
+
 /*
 // verifica si ya existe un nodo en la posición [Depto x Company]
 if (auxCompany->getIzquierda() == auxDepto->getAbajo()) {

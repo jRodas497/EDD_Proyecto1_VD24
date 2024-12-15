@@ -40,6 +40,10 @@ public:
     void reporteActivosDepto(const std::string& depto);
     void reporteActivosCompany(const std::string& company);
 
+    // Funciones de activos
+    NodoAVL* listadoActivos(Usuario* usuarioActual, bool bandera, std::string id);
+    NodoAVL* listadoActivos(Usuario* usuarioActual, NodoMatriz* comienzo, bool bandera, std::string id);
+
 private:
     NodoMatriz* inicial;
     NodoMatriz* cabeceraH;

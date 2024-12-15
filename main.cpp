@@ -126,11 +126,11 @@ void iniciarDatos() {
 void agregarActivo() {
     std::string nombre, descripcion;
     std::string idAlfa = randomID();
-
+    std::cin.ignore();
     std::cout << "\n>> Ingresar Nombre...: ";
-    std::cin >> nombre;
+    std::getline(std::cin, nombre);
     std::cout << ">> Ingresar Descripcion...: ";
-    std::cin >> descripcion;
+    std::getline(std::cin, descripcion);
 
     usuarioLogueado->getUsuario()->getArbol()->insertar(new Activo(nombre, descripcion, idAlfa, (usuarioLogueado->getUsuario()->getUsuario()) ));
     std::cout << "USUARIO: " << usuarioLogueado->getUsuario()->getUsuario() << std::endl;
@@ -154,17 +154,29 @@ void eliminarActivo() {
 }
 
 void modificarActivo() {
-    int id;
-    std::cout << ">> Ingresar ID del activo a modificar: ";
-    if (!obtenerOpcion(id)) return;
+    std::cin.ignore();
+    if (!usuarioLogueado->getUsuario()->getArbol()->raiz) {
+        std::cout << "No hay activos para eliminar..." << std::endl;
+        return;
+    }
+    usuarioLogueado->getUsuario()->getArbol()->listarActivosUsuario(usuarioLogueado->getUsuario()->getUsuario());
 
-    //arbolActivos.modificar(id);
+    std::string id, descripcion;
+    std::cout << ">> Ingresar ID del activo a modificar: ";
+    std::getline(std::cin, id);
+    std::cout << ">> Ingresar la nueva descripción: ";
+    std::getline(std::cin, descripcion);
+
+    usuarioLogueado->getUsuario()->getArbol()->modificarActivo(id, descripcion);
+    std::cout << "Activo modificado! \n" << std::endl;
 }
 
 void rentarActivo() {
-    int id;
+    std::string id;
+    std::cout << ">>>> Rentar Activos Disponibles <<<< \n";
+    matriz->listadoActivos(usuarioLogueado->getUsuario(), true, "");
+
     std::cout << ">> Ingresar ID del activo a rentar: ";
-    if (!obtenerOpcion(id)) return;
 
     //arbolActivos.rentar(id);
 }

@@ -60,26 +60,26 @@ void iniciarDatos() {
     Usuario* u3 = new Usuario("Tziquin Pashut", "tutsi", "tutsi");
     Usuario* u4 = new Usuario("Juan Rodas", "jrodas", "1234");
 
-    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID(), (u1->getUsuario())));
-    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID(), (u1->getUsuario())));
+    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID(), (u1->getUsuario()),"15"));
+    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID(), (u1->getUsuario()), "20"));
+    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID(), (u1->getUsuario()), "10"));
+    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID(), (u1->getUsuario()), "5"));
+    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID(), (u1->getUsuario()), "5"));
+    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID(), (u1->getUsuario()), "5"));
+    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID(), (u1->getUsuario()), "5"));
+    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID(), (u1->getUsuario()), "5"));
 
-    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID(), (u2->getUsuario())));
-    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID(), (u2->getUsuario())));
+    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID(), (u2->getUsuario()), "16"));
+    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID(), (u2->getUsuario()), "17"));
 
-    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID(), (u3->getUsuario())));
-    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID(), (u3->getUsuario())));
-    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID(), (u3->getUsuario())));
-    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID(), (u3->getUsuario())));
+    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID(), (u3->getUsuario()), "18"));
+    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID(), (u3->getUsuario()), "50"));
+    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID(), (u3->getUsuario()),"1"));
+    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID(), (u3->getUsuario()), "6"));
 
-    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID(), (u4->getUsuario())));
-    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID(), (u4->getUsuario())));
-    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID(), (u4->getUsuario())));
+    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID(), (u4->getUsuario()), "7"));
+    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID(), (u4->getUsuario()), "8"));
+    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID(), (u4->getUsuario()), "6"));
 
     // Usuarios con el mismo departamento y empresa
     matriz->insertarUsuario(u1, "guatemala", "usac", true);
@@ -124,15 +124,17 @@ void iniciarDatos() {
  */
 
 void agregarActivo() {
-    std::string nombre, descripcion;
+    std::string nombre, descripcion, diasMax;
     std::string idAlfa = randomID();
     std::cin.ignore();
     std::cout << "\n>> Ingresar Nombre...: ";
     std::getline(std::cin, nombre);
     std::cout << ">> Ingresar Descripcion...: ";
     std::getline(std::cin, descripcion);
+    std::cout << ">> Ingresar Dias Maximos de Renta...: ";
+    std::getline(std::cin, diasMax);
 
-    usuarioLogueado->getUsuario()->getArbol()->insertar(new Activo(nombre, descripcion, idAlfa, (usuarioLogueado->getUsuario()->getUsuario()) ));
+    usuarioLogueado->getUsuario()->getArbol()->insertar(new Activo(nombre, descripcion, idAlfa, (usuarioLogueado->getUsuario()->getUsuario()), diasMax ));
     std::cout << "USUARIO: " << usuarioLogueado->getUsuario()->getUsuario() << std::endl;
     std::cout << "Nombre: " << nombre << " | Descripcion: " << descripcion << " | ID(15): " << idAlfa  << std::endl;
 }
@@ -150,7 +152,6 @@ void eliminarActivo() {
     std::getline(std::cin, id);
 
     usuarioLogueado->getUsuario()->getArbol()->eliminar(id);
-    std::cout << "Activo eliminado! \n" << std::endl;
 }
 
 void modificarActivo() {
@@ -172,23 +173,79 @@ void modificarActivo() {
 }
 
 void rentarActivo() {
+    std::cin.ignore();
     std::string id;
-    std::cout << ">>>> Rentar Activos Disponibles <<<< \n";
+    std::string dias;
+    std::cout << "\n>>>> Rentar Activos Disponibles <<<<";
     matriz->listadoActivos(usuarioLogueado->getUsuario(), true, "");
+    std::cout << "\n>> Ingresar ID del activo a rentar: ";
+    std::getline(std::cin, id);
 
-    std::cout << ">> Ingresar ID del activo a rentar: ";
+    NodoAVL* activoRentado = matriz->listadoActivos(usuarioLogueado->getUsuario(), false, id);
 
-    //arbolActivos.rentar(id);
+    if (activoRentado != nullptr) {
+        std::cout << "Activo seleccionado: " << std::endl;
+        std::cout << "\n / ID: " << activoRentado->getActivo()->getId() << std::endl;
+        std::cout << "  / Nombre: " << activoRentado->getActivo()->getNombre() << std::endl;
+        std::cout << "   / Descripcion: " << activoRentado->getActivo()->getDescripcion() << std::endl;
+        std::cout << "    / Dias Maximos de Renta: " << activoRentado->getActivo()->getDiasMax() << std::endl;
+
+        std::cout << " \nIngrese los días por rentar: ";
+        std::getline(std::cin, dias);
+        activoRentado->getActivo()->setRentado(true);
+        activoRentado->getActivo()->setDiasRenta(dias);
+
+        if (std::stoi(dias) <= std::stoi(activoRentado->getActivo()->getDiasMax())) {
+            std::cout << "Renta permitida por " << dias << " días." << std::endl;
+
+            transaccion->insertarTransaccion(new Transaccion(activoRentado->getActivo(), usuarioLogueado->getUsuario()->getUsuario(), matriz->buscarCabeceraHorizontal(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), matriz->buscarCabeceraVertical(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), activoRentado->getActivo()->getDiasMax(),dias, "Renta"));
+            std::cout << "Activo Rentado!" << std::endl;
+        } else {
+            std::cout << "La cantidad de días rentados excede los días máximos permitidos." << std::endl;
+        }
+    }
 }
 
 void activosRentados() {
+    std::cin.ignore();
+    std::string id;
     std::cout << ">> Listado de Activos Rentados: \n";
-    //arbolActivos.activosRentados();
+    //transaccion->recorrerLista(usuarioLogueado->getUsuario()->getUsuario());
+    if (transaccion->recorrerLista(usuarioLogueado->getUsuario()->getUsuario())) {
+
+        std::cout << "\nIngrese el id del Activo a devolver: " << std::endl;
+        std::getline(std::cin, id);
+
+        NodoAVL* activoRentado = matriz->listadoActivos(usuarioLogueado->getUsuario(), false, id);
+
+        if (activoRentado != nullptr) {
+            std::cout << "\nActivo Devuelto: " << std::endl;
+            std::cout << "\n>> ID = " << activoRentado->getActivo()->getId() << "; Nombre = " << activoRentado->getActivo()->getNombre() << "; Descripcion = " << activoRentado->getActivo()->getDescripcion() << std::endl;
+
+            activoRentado->getActivo()->setRentado(false);
+            activoRentado->getActivo()->setDiasRenta("");
+
+            transaccion->insertarTransaccion(new Transaccion(activoRentado->getActivo(), usuarioLogueado->getUsuario()->getUsuario(), matriz->buscarCabeceraHorizontal(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), matriz->buscarCabeceraVertical(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), activoRentado->getActivo()->getDiasMax(),"", "Devolver"));
+
+            std::cout << "\nActivo devuelto exitosamente..." << std::endl;
+            std::cin.ignore();
+
+        } else {
+            std::cout << "\nActivo no encontrado..." << std::endl;
+            std::cin.ignore();
+        }
+    } else {
+        std::cout << "\nNo hay activos rentados..." << std::endl;
+    }
 }
 
 void misActivosRentados() {
-    std::cout << ">> Listado de Mis Activos Rentados: \n";
-    //arbolActivos.misActivosRentados();
+    std::cout << ">> Listado de Mis Activos Actualmente Rentados: \n";
+    if (usuarioLogueado->getUsuario()->getArbol()->raiz) {
+        usuarioLogueado->getUsuario()->getArbol()->listarActivosRentados(usuarioLogueado->getUsuario()->getArbol()->raiz);
+    } else {
+        std::cout << "Ninguno de tus activos están rentados" << std::endl;
+    }
 }
 
 void menuUsuario(const std::string& user) {
@@ -492,6 +549,7 @@ void mainMenu() {
             break;
         default:
             std::cout << "\nPor favor escoja una de las opciones disponibles...\n";
+            mainMenu();
     }
 }
 

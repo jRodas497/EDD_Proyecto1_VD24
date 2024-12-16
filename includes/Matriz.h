@@ -44,6 +44,8 @@ public:
     NodoAVL* listadoActivos(Usuario* usuarioActual, bool bandera, std::string id);
     NodoAVL* listadoActivos(Usuario* usuarioActual, NodoMatriz* comienzo, bool bandera, std::string id);
 
+
+    NodoMatriz* buscarUsuarioCabeza(NodoMatriz* usuarioActual);
 private:
     NodoMatriz* inicial;
     NodoMatriz* cabeceraH;

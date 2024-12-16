@@ -834,7 +834,6 @@ NodoAVL* Matriz::listadoActivos(Usuario* usuario, bool bandera, std::string id) 
     if (inicial->getAbajo() != nullptr) {
         return listadoActivos(usuario, inicial->getAbajo(), bandera, id);
     }
-    return nullptr; // Retornar nullptr si no hay más nodos abajo
 }
 // Lista los activos de un usuario [Recursivo]
 NodoAVL* Matriz::listadoActivos(Usuario* usuario, NodoMatriz* start, bool bandera, std::string id) {
@@ -848,6 +847,7 @@ NodoAVL* Matriz::listadoActivos(Usuario* usuario, NodoMatriz* start, bool bander
             do {
                 if (aux2->getUsuario() != usuario) {
                     if (bandera) {
+                        //aux2->getUsuario()->getArbol()->preOrden(true);
                         aux2->getUsuario()->getArbol()->preOrden(true);
                     } else {
                         NodoAVL* activoRentado = aux2->getUsuario()->getArbol()->buscar(id, aux2->getUsuario()->getArbol()->raiz);
@@ -863,6 +863,16 @@ NodoAVL* Matriz::listadoActivos(Usuario* usuario, NodoMatriz* start, bool bander
     }
     // Retornar nullptr si no hay más nodos
     return nullptr;
+}
+
+NodoMatriz* Matriz::buscarUsuarioCabeza(NodoMatriz* usuarioActual) {
+    NodoMatriz* aux = usuarioActual;
+
+    while (aux != nullptr && aux->getDelante() != nullptr) {
+        aux = aux->getDelante();
+    }
+
+    return aux;
 }
 
 /*

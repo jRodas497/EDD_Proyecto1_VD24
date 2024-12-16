@@ -6,8 +6,8 @@
 // Constructor por defecto
 Transaccion::Transaccion() : idActivo(nullptr) {}
 
-Transaccion::Transaccion(Activo* idActivo, std::string nombreUsuario, std::string departamento, std::string empresa, std::string fecha, std::string dias)
-    : idActivo(idActivo), nombreUsuario(nombreUsuario), departamento(departamento), empresa(empresa), fecha(fecha), dias(dias) {}
+Transaccion::Transaccion(Activo* idActivo, std::string nombreUsuario, std::string departamento, std::string empresa, std::string fecha, std::string dias, std::string accion)
+    : idActivo(idActivo), nombreUsuario(nombreUsuario), departamento(departamento), empresa(empresa), fecha(fecha), dias(dias), accion(accion) {}
 
 // Setters y Getters
 void Transaccion::setId(std::string id) {
@@ -31,6 +31,10 @@ void Transaccion::setNombreUsuario(std::string nombreUsuario) {
 }
 
 std::string Transaccion::getNombreUsuario() {
+    return nombreUsuario;
+}
+
+std::string Transaccion::getAccion() {
     return nombreUsuario;
 }
 
@@ -64,4 +68,8 @@ void Transaccion::setDias(std::string dias) {
 
 std::string Transaccion::getDias() {
     return dias;
+}
+
+void Transaccion::setAccion(std::string accion) {
+    this->accion = accion;
 }

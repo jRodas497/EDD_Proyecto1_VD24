@@ -11,7 +11,7 @@
 class Transaccion {
 public:
     Transaccion();
-    Transaccion(Activo* idActivo, std::string nombreUsuario, std::string departamento, std::string empresa, std::string fecha, std::string dias);
+    Transaccion(Activo* idActivo, std::string nombreUsuario, std::string departamento, std::string empresa, std::string fecha, std::string dias, std::string accion);
 
     std::string arreglar(std::string id);
 
@@ -23,6 +23,7 @@ public:
     std::string getEmpresa();
     std::string getFecha();
     std::string getDias();
+    std::string getAccion();
 
     // setters
     void setId(std::string id);
@@ -32,6 +33,7 @@ public:
     void setEmpresa(std::string empresa);
     void setFecha(std::string fecha);
     void setDias(std::string dias);
+    void setAccion(std::string accion);
 
 private:
     std::string id;
@@ -41,6 +43,7 @@ private:
     std::string empresa;
     std::string fecha;
     std::string dias;
+    std::string accion;
 };
 
 

@@ -58,11 +58,13 @@ void ArbolAVL::eliminar(const std::string& id) {
         std::string idEliminado = eliminado->getActivo()->getId();
         std::string nombre = eliminado->getActivo()->getNombre();
         std::string descripcion = eliminado->getActivo()->getDescripcion();
+        std::string diasMax = eliminado->getActivo()->getDiasMax();
         // Suprimir el nodo del árbol
         raiz = eliminar(id, raiz);
         if (raiz != nullptr) {
             std::cout << "\nActivo Suprimido: " << std::endl << " / ID: " << idEliminado << std::endl;
-            std::cout << "  / Nombre: " << nombre << std::endl << "   / Descripcion: " << descripcion  << "\n" << std::endl;
+            std::cout << "  / Nombre: " << nombre << std::endl << "   / Descripcion: " << descripcion  << std::endl;
+            std::cout << "    / Dias Max: " << diasMax << "\n" << std::endl;
         }
     } else {
         std::cout << "\nEl activo no existe...";
@@ -149,7 +151,7 @@ bool ArbolAVL::modificarActivo(const std::string& id, const std::string& descrip
         // Actualizar la descripción del activo
         activo->getActivo()->setDescripcion(descripcion);
         std::cout << "\nActivo Modificado:" << std::endl << " / ID = " << activo->getActivo()->getId() << std::endl;
-        std::cout << "  / Nombre = " << activo->getActivo()->getNombre() << std::endl << "   / Descripción = " << activo->getActivo()->getDescripcion() << "\n" << std::endl;
+        std::cout << "  / Nombre = " << activo->getActivo()->getNombre() << std::endl << "   / Descripción = " << activo->getActivo()->getDescripcion() << "    / Dias Max = " << activo->getActivo()->getDiasMax() <<"\n" << std::endl;
         return true;
     }
     return false;
@@ -258,12 +260,12 @@ void ArbolAVL::preOrden(NodoAVL* nodo, bool bandera) {
         if (bandera) {
             // Si el activo no está rentado (disponible), imprimir sus detalles
             if (!nodo->getActivo()->getRentado()) {
-                std::cout << "\n>> ID = " << nodo->getActivo()->getId() << "; Nombre = " << nodo->getActivo()->getNombre() << "; Descripción = " << nodo->getActivo()->getDescripcion();
+                std::cout << "\n>> ID = " << nodo->getActivo()->getId() << "; Nombre = " << nodo->getActivo()->getNombre() << "; Dias Max = " << nodo->getActivo()->getDiasMax();
             }
         } else {
             // Si el activo está rentado (no disponible), imprimir sus detalles
             if (nodo->getActivo()->getRentado()) {
-                std::cout << "\n>> ID = " << nodo->getActivo()->getId() << "; Nombre = " << nodo->getActivo()->getNombre() << "; Descripción = " << nodo->getActivo()->getDescripcion();
+                std::cout << "\n>> ID = " << nodo->getActivo()->getId() << "; Nombre = " << nodo->getActivo()->getNombre() << "; Dias Max = " << nodo->getActivo()->getDiasMax();
             }
         }
         // Recorrer el subárbol izquierdo
@@ -363,4 +365,13 @@ std::string ArbolAVL::activosUsuarioPre(NodoAVL* usuarioActual, std::string dot)
     }
 
     return dot2;
+}
+void ArbolAVL::listarActivosRentados(NodoAVL* nodo) {
+    if (nodo != nullptr) {
+        listarActivosRentados(nodo->getHijoIzq());
+        if (nodo->getActivo()->getRentado()) {
+            std::cout << " ID: " << nodo->getActivo()->getId() << " | Nombre: " << nodo->getActivo()->getNombre() << " | Descripción: " << nodo->getActivo()->getDescripcion() << " | Días de Renta: " << nodo->getActivo()->getDiasRenta() << std::endl;
+        }
+        listarActivosRentados(nodo->getHijoDer());
+    }
 }

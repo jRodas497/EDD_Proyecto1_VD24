@@ -91,8 +91,9 @@ bool ListaTransaccion::recorrerLista(string usuario) {
         NodoTransaccion* aux = ini;
         do {
             //if (aux->getTransaccion()->getNombreUsuario() == usuario && !aux->getTransaccion()->getIdActivo()->getRentado()) {
+            std::cout << "Usuario: " << aux->getTransaccion()->getNombreUsuario() <<  std::endl;
             if (aux->getTransaccion()->getNombreUsuario() == usuario && aux->getTransaccion()->getIdActivo()->getRentado()) {
-                std::cout << ">>ID = " << aux->getTransaccion()->getIdActivo()->getId() << "; Nombre = " << aux->getTransaccion()->getIdActivo()->getNombre() << "; Tiempo de Renta = " << aux->getTransaccion()->getDias() << endl;
+                std::cout << " >>ID = " << aux->getTransaccion()->getIdActivo()->getId() << "; Nombre = " << aux->getTransaccion()->getIdActivo()->getNombre() << "; Tiempo de Renta = " << aux->getTransaccion()->getDias() << std::endl;
             }
             aux = aux->getSig();
         } while (aux != ini);

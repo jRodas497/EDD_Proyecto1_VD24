@@ -55,4 +55,6 @@ public:
     // Funciones de impresión de activos por usuario
     void activosUsuario(NodoAVL* usuarioActual, std::string usuario);
     std::string activosUsuarioPre(NodoAVL* usuarioActual, std::string dot);
+
+    void listarActivosRentados(NodoAVL* nodo);
 };

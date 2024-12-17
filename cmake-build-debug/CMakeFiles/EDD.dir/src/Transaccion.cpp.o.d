@@ -1,7 +1,7 @@
 CMakeFiles/EDD.dir/src/Transaccion.cpp.o: \
  /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/src/Transaccion.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Transaccion.h \
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/src/../includes/Transaccion.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -122,4 +122,4 @@ CMakeFiles/EDD.dir/src/Transaccion.cpp.o: \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
  /usr/include/c++/13/bits/ranges_util.h \
- /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/includes/Activo.h
+ /mnt/c/Users/Usuario/Desktop/Proyectos\ CLion/EDD/src/../includes/Activo.h

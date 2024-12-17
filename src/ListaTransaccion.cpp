@@ -18,7 +18,7 @@ void ListaTransaccion::insertarTransaccion(Transaccion* transaccion) {
         if (aux == ini && aux == fin) {
             if (elemento->getTransaccion()->getId() > aux->getTransaccion()->getId()) {
                 insertarAlFinal(elemento);
-            } else if (elemento->getTransaccion()->getId() < aux->getTransaccion()->getId()) {
+            } else {
                 insertarAlFrente(elemento);
             }
         } else {
@@ -33,7 +33,11 @@ void ListaTransaccion::insertarTransaccion(Transaccion* transaccion) {
                     }
                 aux = aux->getSig();
             }
-            insertarAlFinal(elemento);
+            if (elemento->getTransaccion()->getId() < aux->getTransaccion()->getId()) {
+                insertarAlFrente(elemento);
+            } else {
+                insertarAlFinal(elemento);
+            }
         }
     } else {
         ini = fin = elemento;
@@ -91,7 +95,6 @@ bool ListaTransaccion::recorrerLista(string usuario) {
         NodoTransaccion* aux = ini;
         do {
             //if (aux->getTransaccion()->getNombreUsuario() == usuario && !aux->getTransaccion()->getIdActivo()->getRentado()) {
-            std::cout << "Usuario: " << aux->getTransaccion()->getNombreUsuario() <<  std::endl;
             if (aux->getTransaccion()->getNombreUsuario() == usuario && aux->getTransaccion()->getIdActivo()->getRentado()) {
                 std::cout << " >>ID = " << aux->getTransaccion()->getIdActivo()->getId() << "; Nombre = " << aux->getTransaccion()->getIdActivo()->getNombre() << "; Tiempo de Renta = " << aux->getTransaccion()->getDias() << std::endl;
             }

@@ -55,68 +55,59 @@ void iniciarDatos() {
     datosCargados = true;
 
         // Activos
-    Usuario* u1 = new Usuario("Pedro Perez", "pperez", "peres");
-    Usuario* u2 = new Usuario("Juan Camanei", "juancho", "1111");
-    Usuario* u3 = new Usuario("Tziquin Pashut", "tutsi", "tutsi");
-    Usuario* u4 = new Usuario("Juan Rodas", "jrodas", "1234");
+    Usuario* usuario1 = new Usuario("Elian Estrada", "elian_estrada", "1234");
+    Usuario* usuario2 = new Usuario("Juan Perez", "juanito", "4567");
+    Usuario* usuario3 = new Usuario("Pedro Rodriguez", "pedrito", "48956");
+    Usuario* usuario4 = new Usuario("Maria Fernanda", "mafer", "54312");
+    Usuario* usuario5 = new Usuario("Juan Manuel", "juanma", "32897");
+    Usuario* usuario6 = new Usuario("Carlos Perez", "casimiro", "721896");
+    Usuario* usuario7 = new Usuario("Fernando Mendez", "fuego03", "891346");
+    Usuario* usuario8 = new Usuario("Alejandra Guzman", "azurdia", "780145");
+    Usuario* usuario9 = new Usuario("Iraldo Martinez", "incrediboy", "201598");
+    Usuario* usuario10 = new Usuario("Antonio Lopez", "alcachofa", "20435");
 
-    u1->getArbol()->insertar(new Activo("Activo 1", "Descripcion 1", randomID(), (u1->getUsuario()),"15"));
-    u1->getArbol()->insertar(new Activo("Activo 2", "Descripcion 2", randomID(), (u1->getUsuario()), "20"));
-    u1->getArbol()->insertar(new Activo("Activo 3", "Descripcion 3", randomID(), (u1->getUsuario()), "10"));
-    u1->getArbol()->insertar(new Activo("Activo 4", "Descripcion 4", randomID(), (u1->getUsuario()), "5"));
-    u1->getArbol()->insertar(new Activo("Deportes", "Descripcion Deportiva", randomID(), (u1->getUsuario()), "5"));
-    u1->getArbol()->insertar(new Activo("Activo 5", "Descripcion 5", randomID(), (u1->getUsuario()), "5"));
-    u1->getArbol()->insertar(new Activo("Activo 6", "Descripcion 6", randomID(), (u1->getUsuario()), "5"));
-    u1->getArbol()->insertar(new Activo("Activo 7", "Descripcion 7", randomID(), (u1->getUsuario()), "5"));
+    // ELIAN_ESTRADA
+    usuario1->getArbol()->insertar(new Activo("madera", "madera para albañil", randomID(), (usuario1->getUsuario()),"20"));
+    usuario1->getArbol()->insertar(new Activo("martillos", "martillos para madera", randomID(), (usuario1->getUsuario()), "10"));
+    usuario1->getArbol()->insertar(new Activo("caladora", "caladora para cortar maderas prefabricadas", randomID(), (usuario1->getUsuario()), "15"));
+    usuario1->getArbol()->insertar(new Activo("barreno", "barreno para concreto", randomID(), (usuario1->getUsuario()), "5"));
 
-    u2->getArbol()->insertar(new Activo("Activo 8", "Descripcion 5", randomID(), (u2->getUsuario()), "16"));
-    u2->getArbol()->insertar(new Activo("Activo 9", "Descripcion 6", randomID(), (u2->getUsuario()), "17"));
+    //CASIMIRO
+    usuario6->getArbol()->insertar(new Activo("balanza", "balanza con maximo de 25kg", randomID(), (usuario6->getUsuario()), "15"));
+    usuario6->getArbol()->insertar(new Activo("canastas", "canastas para frutas y verduras", randomID(), (usuario6->getUsuario()), "45"));
+    usuario6->getArbol()->insertar(new Activo("linternas", "linternas para alumbrar cuartos oscuros", randomID(), (usuario6->getUsuario()), "10"));
+    usuario6->getArbol()->insertar(new Activo("cargadores", "cargadores de telefonos tipo c", randomID(), (usuario6->getUsuario()), "5"));
+    usuario6->getArbol()->insertar(new Activo("cables", "cables de todo tipo", randomID(), (usuario6->getUsuario()), "10"));
+    usuario6->getArbol()->insertar(new Activo("lazos", "lazos para tender ropa", randomID(), (usuario6->getUsuario()), "20"));
 
-    u3->getArbol()->insertar(new Activo("Activo 10", "Descripcion 7", randomID(), (u3->getUsuario()), "18"));
-    u3->getArbol()->insertar(new Activo("Activo 11", "Descripcion 8", randomID(), (u3->getUsuario()), "50"));
-    u3->getArbol()->insertar(new Activo("Activo 12", "Descripcion 9", randomID(), (u3->getUsuario()),"1"));
-    u3->getArbol()->insertar(new Activo("Activo 13", "Descripcion 10", randomID(), (u3->getUsuario()), "6"));
+    //FUEGO03
+    usuario7->getArbol()->insertar(new Activo("termos", "pequeños termos para bebidas calientes", randomID(), (usuario7->getUsuario()), "10"));
+    usuario7->getArbol()->insertar(new Activo("maletas", "maletas desde pequeñas a grandes", randomID(), (usuario7->getUsuario()), "15"));
+    usuario7->getArbol()->insertar(new Activo("peliculas", "todo tipo de peliculas de accion", randomID(), (usuario7->getUsuario()),"5"));
 
-    u4->getArbol()->insertar(new Activo("Activo 14", "Descripcion 11", randomID(), (u4->getUsuario()), "7"));
-    u4->getArbol()->insertar(new Activo("Activo 15", "Descripcion 12", randomID(), (u4->getUsuario()), "8"));
-    u4->getArbol()->insertar(new Activo("Activo 16", "Descripcion 13", randomID(), (u4->getUsuario()), "6"));
+    //INCREDIBOY
+    /*usuario9->getArbol()->insertar(new Activo("casets", "casets con musica de todo tipo", randomID(), (usuario9->getUsuario()), "5"));*/
+    usuario9->getArbol()->insertar(new Activo("casest", "casets con musica de todo tipo", randomID(), (usuario9->getUsuario()), "5"));
+    usuario9->getArbol()->insertar(new Activo("pantallas", "pantallas para proyección", randomID(), (usuario9->getUsuario()), "10"));
+    usuario9->getArbol()->insertar(new Activo("cañonera", "cañonera para proyeccion", randomID(), (usuario9->getUsuario()), "10"));
+    usuario9->getArbol()->insertar(new Activo("toldo", "toldo para eventos al exterior", randomID(), (usuario9->getUsuario()), "5"));
 
-    // Usuarios con el mismo departamento y empresa
-    matriz->insertarUsuario(u1, "guatemala", "usac", true);
-    matriz->insertarUsuario(u2, "guatemala", "usac", true);
-    matriz->insertarUsuario(u3, "guatemala", "usac", false);
-    matriz->insertarUsuario(u4, "guatemala", "usac", false);
+    //MAFER
+    usuario4->getArbol()->insertar(new Activo("audifonos", "audifonos para grabaciones de estudio", randomID(), (usuario4->getUsuario()), "10"));
+    usuario4->getArbol()->insertar(new Activo("microfonos", "microfonos de todo tipo", randomID(), (usuario4->getUsuario()), "8"));
+    usuario4->getArbol()->insertar(new Activo("pedestales", "pedestales para microfonos grandes y pequeños", randomID(), (usuario4->getUsuario()), "12"));
+    usuario4->getArbol()->insertar(new Activo("atriles", "atriles para colocar ojas con gancho", randomID(), (usuario4->getUsuario()), "14"));
 
-                //matriz->listarUsuarios("guatemala", "usac");
-    matriz->insertarUsuario(new Usuario("Frank Miller", "fmiller", "pass6"), "santa rosa", "twitch", true);
-    matriz->insertarUsuario(new Usuario("Grace Lee", "glee", "pass7"), "santa rosa", "twitch", false);
-    matriz->insertarUsuario(new Usuario("Eva Davis", "rocinante", "pass5"), "santa rosa", "twitch", false);
-                //matriz->listarUsuarios("santa rosa", "twitch");
-    matriz->insertarUsuario(new Usuario("Marco Tulio", "mt", "pass"), "santa rosa", "usac", false);
-                //matriz->listarUsuarios("santa rosa", "usac");
-    matriz->insertarUsuario(new Usuario("Juan Carlos", "carlos", "pass"), "guatemala", "twitch", false);
-                //matriz->listarUsuarios("guatemala", "twitch");
-    matriz->insertarUsuario(new Usuario("Rui Valdez","rvaldez17","fnoque"), "jutiapa", "irtra", false);
-    matriz->insertarUsuario(new Usuario("Angel Escobar","gelitras","irtra"), "jrb", "vcorp", true);
-    matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
-                //matriz->listarUsuarios("santa rosa", "irtra");
-    matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
-/*
-    matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("David Wilson", "dwilson", "pass4"), "jalapa", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Jack Clark", "jclark", "pass10"), "chimaltenango", "bigmc", true);
-    // Usuarios con el mismo departamento pero diferente empresa al final
-    matriz->insertarUsuario(new Usuario("Hannah White", "hwhite", "pass8"), "baja verapaz", "bigmc", false);
-    matriz->insertarUsuario(new Usuario("Ian Harris", "iharris", "pass9"), "baja verapaz", "bigmc", false);
-                //matriz->listarUsuariosPorDepto("baja verapaz");
-    // Usuarios con el mismo empresa pero diferente departamento al final
-    matriz->insertarUsuario(new Usuario("Ericka Brown", "ebrown", "pass11"), "escuintla", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "huehuetenango", "bigmc", true);
-    matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "retalhuleu", "bigmc", false);
-            //matriz->listarUsuariosPorCompany("company11");
-*/
+    matriz->insertarUsuario(usuario1, "guatemala", "igss", true);
+    matriz->insertarUsuario(usuario2, "jutiapa", "max", true);
+    matriz->insertarUsuario(usuario3, "jalapa", "usac", true);
+    matriz->insertarUsuario(usuario4, "peten", "cinepolis", true);
+    matriz->insertarUsuario(usuario5, "guatemala", "usac", true);
+    matriz->insertarUsuario(usuario6, "guatemala", "max", true);
+    matriz->insertarUsuario(usuario7, "jutiapa", "cinepolis", true);
+    matriz->insertarUsuario(usuario8, "jutiapa", "usac", true);
+    matriz->insertarUsuario(usuario9, "jutiapa", "max", true);
+    matriz->insertarUsuario(usuario10, "jutiapa", "usac", true);
 }
 
 /*

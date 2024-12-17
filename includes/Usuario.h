@@ -6,7 +6,6 @@
 
 #include <string>
 #include "ArbolAVL.h"
-#include "Activo.h"
 
 class Usuario {
 public:

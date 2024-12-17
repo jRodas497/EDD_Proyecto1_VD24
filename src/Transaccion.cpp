@@ -1,7 +1,7 @@
 //
 // Created by Usuario on 11/12/2024.
 //
-#include "Transaccion.h"
+#include "../includes/Transaccion.h"
 
 // Constructor por defecto
 Transaccion::Transaccion() : idActivo(nullptr) {}

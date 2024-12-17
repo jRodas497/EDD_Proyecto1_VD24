@@ -168,6 +168,8 @@ void ListaTransaccion::reporteTransacciones() {
 
         // Eliminar la última flecha
         dot = dot.substr(0, dot.size() - 3);
+    } else {
+        dot += "vacio";
     }
     dot += ";\n}";
     std::ofstream file;
@@ -182,36 +184,41 @@ void ListaTransaccion::reporteTransacciones() {
 
 void ListaTransaccion::reporteTransaccionesAscendente() {
     string dot = "digraph{ \nrankdir = LR;\n node[shape = box, color = red]; \n";
-    NodoTransaccion* aux = ini;
-    do {
+    if (!estaVacia()) {
+            NodoTransaccion* aux = ini;
+        do {
+            if (aux->getTransaccion()->getDias() != "") {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            } else {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            }
+            aux = aux->getSig();
+        } while (aux != ini);
+        if (ini != fin) {
+            if (ini->getTransaccion()->getDias() != "") {
+                dot += "\"" + ini->getTransaccion()->getId() + "\n" + "RENTADO\n" + ini->getTransaccion()->getIdActivo()->getNombre() + "\n" + ini->getTransaccion()->getNombreUsuario() + "\"->\n";
+            } else {
+                dot += "\"" + ini->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + ini->getTransaccion()->getIdActivo()->getNombre() + "\n" + ini->getTransaccion()->getNombreUsuario() + "\"->\n";
+            }
+        }
+        aux = fin;
+        do {
+            if (aux->getTransaccion()->getDias() != "") {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            } else {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            }
+            aux = aux->getAnt();
+        } while (aux->getAnt() != fin);
         if (aux->getTransaccion()->getDias() != "") {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
         } else {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
         }
-        aux = aux->getSig();
-    } while (aux != ini);
-    if (ini != fin) {
-        if (ini->getTransaccion()->getDias() != "") {
-            dot += "\"" + ini->getTransaccion()->getId() + "\n" + "RENTADO\n" + ini->getTransaccion()->getIdActivo()->getNombre() + "\n" + ini->getTransaccion()->getNombreUsuario() + "\"->\n";
-        } else {
-            dot += "\"" + ini->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + ini->getTransaccion()->getIdActivo()->getNombre() + "\n" + ini->getTransaccion()->getNombreUsuario() + "\"->\n";
-        }
-    }
-    aux = fin;
-    do {
-        if (aux->getTransaccion()->getDias() != "") {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
-        } else {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
-        }
-        aux = aux->getAnt();
-    } while (aux->getAnt() != fin);
-    if (aux->getTransaccion()->getDias() != "") {
-        dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
     } else {
-        dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
+        dot += "vacio";
     }
+
     dot += ";\n}";
     ofstream file;
     file.open("../Graficas/reporteTransaccionesAscendente.txt");
@@ -224,37 +231,42 @@ void ListaTransaccion::reporteTransaccionesAscendente() {
 
 void ListaTransaccion::reporteTransaccionesDescendente() {
     string dot = "digraph{ \nrankdir = LR;\n node[shape = box, color = red]; \n";
-    NodoTransaccion* aux = fin;
-    do {
-        if (aux->getTransaccion()->getDias() != "") {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
-        } else {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+    if (!estaVacia()) {
+        NodoTransaccion* aux = fin;
+        do {
+            if (aux->getTransaccion()->getDias() != "") {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            } else {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            }
+            aux = aux->getAnt();
+        } while (aux != fin);
+        if (ini != fin) {
+            if (fin->getTransaccion()->getDias() != "") {
+                dot += "\"" + fin->getTransaccion()->getId() + "\n" + "RENTADO\n" + fin->getTransaccion()->getIdActivo()->getNombre() + "\n" + fin->getTransaccion()->getNombreUsuario() + "\"->\n";
+            } else {
+                dot += "\"" + fin->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + fin->getTransaccion()->getIdActivo()->getNombre() + "\n" + fin->getTransaccion()->getNombreUsuario() + "\"->\n";
+            }
         }
-        aux = aux->getAnt();
-    } while (aux != fin);
-    if (ini != fin) {
-        if (fin->getTransaccion()->getDias() != "") {
-            dot += "\"" + fin->getTransaccion()->getId() + "\n" + "RENTADO\n" + fin->getTransaccion()->getIdActivo()->getNombre() + "\n" + fin->getTransaccion()->getNombreUsuario() + "\"->\n";
-        } else {
-            dot += "\"" + fin->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + fin->getTransaccion()->getIdActivo()->getNombre() + "\n" + fin->getTransaccion()->getNombreUsuario() + "\"->\n";
-        }
-    }
-    aux = ini;
-    do {
-        if (aux->getTransaccion()->getDias() != "") {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
-        } else {
-            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
-        }
-        aux = aux->getSig();
-    } while (aux->getSig() != ini);
+        aux = ini;
+        do {
+            if (aux->getTransaccion()->getDias() != "") {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            } else {
+                dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"->\n";
+            }
+            aux = aux->getSig();
+        } while (aux->getSig() != ini);
 
-    if (aux->getTransaccion()->getDias() != "") {
-        dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
+        if (aux->getTransaccion()->getDias() != "") {
+            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "RENTADO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
+        } else {
+            dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
+        }
     } else {
-        dot += "\"" + aux->getTransaccion()->getId() + "\n" + "DEVUELTO\n" + aux->getTransaccion()->getIdActivo()->getNombre() + "\n" + aux->getTransaccion()->getNombreUsuario() + "\"";
+        dot += "vacio";
     }
+
     dot += ";\n}";
     ofstream file;
     file.open("../Graficas/reporteTransaccionesDescendente.txt");

@@ -11,7 +11,7 @@ public:
     const std::string& getNombre();
     const std::string& getDescripcion();
     const std::string& getDiasMax();
-    bool getRentado();
+    bool getRentado() const;
     const std::string& getUsuario();
     const std::string& getDiasRenta();
     // setters

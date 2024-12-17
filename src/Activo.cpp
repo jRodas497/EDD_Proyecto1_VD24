@@ -4,7 +4,7 @@
 #include "../includes/Activo.h"
 
 Activo::Activo(const std::string& nombre, const std::string& descripcion, const std::string& id, const std::string& usuario, const std::string& diasMax)
-    : nombre(nombre), descripcion(descripcion), id(id), rentado(false), usuario(usuario), diasMax(diasMax) {
+    : id(id), nombre(nombre), descripcion(descripcion), diasMax(diasMax), rentado(false), usuario(usuario) {
 }
 // getters
 const std::string& Activo::getId() {
@@ -23,7 +23,7 @@ const std::string& Activo::getDiasMax() {
     return diasMax;
 }
 
-bool Activo::getRentado() {
+bool Activo::getRentado() const {
     return rentado;
 }
 

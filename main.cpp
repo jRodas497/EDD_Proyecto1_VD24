@@ -8,7 +8,7 @@
 #include <cctype>
 #include <random>
 
-#include "ListaTransaccion.h"
+#include "includes/ListaTransaccion.h"
 #include "includes/Activo.h"
 #include "includes/Usuario.h"
 #include "includes/Matriz.h"
@@ -101,6 +101,7 @@ void iniciarDatos() {
     matriz->insertarUsuario(new Usuario("Juan Perez", "jperez", "pass"), "santa rosa", "irtra", false);
                 //matriz->listarUsuarios("santa rosa", "irtra");
     matriz->insertarUsuario(new Usuario("Kevincito Kevincito","andresito","emy"), "peten", "bigmc", true);
+/*
     matriz->insertarUsuario(new Usuario("Alice Smith", "asmith", "pass1"), "san marcos", "bigmc", true);
     matriz->insertarUsuario(new Usuario("Bob Johnson", "bjohnson", "pass2"), "quetzaltenango", "bigmc", true);
     matriz->insertarUsuario(new Usuario("Charlie Brown", "cbrown", "pass3"), "quiche", "bigmc", true);
@@ -115,6 +116,7 @@ void iniciarDatos() {
     matriz->insertarUsuario(new Usuario("Fernando Perez", "fperez", "pass12"), "huehuetenango", "bigmc", true);
     matriz->insertarUsuario(new Usuario("Gloria Smith", "gsmith", "pass13"), "retalhuleu", "bigmc", false);
             //matriz->listarUsuariosPorCompany("company11");
+*/
 }
 
 /*
@@ -134,7 +136,9 @@ void agregarActivo() {
     std::cout << ">> Ingresar Dias Maximos de Renta...: ";
     std::getline(std::cin, diasMax);
 
-    usuarioLogueado->getUsuario()->getArbol()->insertar(new Activo(nombre, descripcion, idAlfa, (usuarioLogueado->getUsuario()->getUsuario()), diasMax ));
+    std::string usuario = usuarioLogueado->getUsuario()->getUsuario();
+
+    usuarioLogueado->getUsuario()->getArbol()->insertar(new Activo(nombre, descripcion, idAlfa, usuario, diasMax ));
     std::cout << "USUARIO: " << usuarioLogueado->getUsuario()->getUsuario() << std::endl;
     std::cout << "Nombre: " << nombre << " | Descripcion: " << descripcion << " | ID(15): " << idAlfa  << std::endl;
 }
@@ -198,7 +202,11 @@ void rentarActivo() {
         if (std::stoi(dias) <= std::stoi(activoRentado->getActivo()->getDiasMax())) {
             std::cout << "Renta permitida por " << dias << " días." << std::endl;
 
-            transaccion->insertarTransaccion(new Transaccion(activoRentado->getActivo(), usuarioLogueado->getUsuario()->getUsuario(), matriz->buscarCabeceraHorizontal(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), matriz->buscarCabeceraVertical(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), activoRentado->getActivo()->getDiasMax(),dias, "Renta"));
+            std::string departamento = matriz->buscarCabeceraHorizontal(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera();
+            std ::string empresa = matriz->buscarCabeceraVertical(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera();
+            std::string fecha = activoRentado->getActivo()->getDiasMax();
+
+            transaccion->insertarTransaccion(new Transaccion(activoRentado->getActivo(), usuarioLogueado->getUsuario()->getUsuario(), departamento, empresa, fecha,dias, "Renta"));
             std::cout << "Activo Rentado!" << std::endl;
         } else {
             std::cout << "La cantidad de días rentados excede los días máximos permitidos." << std::endl;
@@ -225,7 +233,12 @@ void activosRentados() {
             activoRentado->getActivo()->setRentado(false);
             activoRentado->getActivo()->setDiasRenta("");
 
-            transaccion->insertarTransaccion(new Transaccion(activoRentado->getActivo(), usuarioLogueado->getUsuario()->getUsuario(), matriz->buscarCabeceraHorizontal(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), matriz->buscarCabeceraVertical(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera(), activoRentado->getActivo()->getDiasMax(),"", "Devolver"));
+            std::string usuario = usuarioLogueado->getUsuario()->getUsuario();
+            std::string departamento = matriz->buscarCabeceraHorizontal(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera();
+            std::string empresa = matriz->buscarCabeceraVertical(matriz->buscarUsuarioCabeza(usuarioLogueado))->getCabecera();
+            std::string fecha = activoRentado->getActivo()->getDiasMax();
+
+            transaccion->insertarTransaccion(new Transaccion(activoRentado->getActivo(), usuario, departamento, empresa, fecha,"", "Devolver"));
 
             std::cout << "\nActivo devuelto exitosamente..." << std::endl;
             std::cin.ignore();
@@ -369,7 +382,7 @@ void reporteTransacciones() {
 }
 
 void reporteActivosUsuario() {
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.ignore();
     std::string usuario, depto, company;
     std::cout << ">> Ingresar Usuario: ";
     std::getline(std::cin, usuario);
@@ -379,7 +392,7 @@ void reporteActivosUsuario() {
     std::getline(std::cin, company);
     //std::transform(user.begin(), user.end(), user.begin(), ::tolower);
 
-    NodoMatriz* auxiliar = matriz->existeEn(matriz->companyBuscar(company), depto);
+    NodoMatriz* auxiliar = matriz->existeEn(matriz->deptoBuscar(depto), company);
     if (auxiliar != nullptr) {
         do {
             if (auxiliar->getUsuario()->getUsuario() == usuario) {
@@ -391,11 +404,10 @@ void reporteActivosUsuario() {
 
         if (auxiliar == nullptr) {
             std::cout << "\nEl nombre del usuario está incorrecto..." << std::endl;
-            std::cin.ignore();
         }
+
     } else {
-        std::cout << "\nEl usuario no existe..." << std::endl;
-        std::cin.ignore();
+        std::cout << "\nNo hay usuarios en [" << depto << "x" << company << "]" << std::endl;
     }
     std::cout << ">> Reporte de Activos de Usuario generado!\n";
 }

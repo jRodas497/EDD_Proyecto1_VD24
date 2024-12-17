@@ -332,7 +332,6 @@ void ArbolAVL::activosUsuario(NodoAVL* usuarioActual, std::string usuario) {
         file.close();
     }
 
-    // Generar la imagen PNG usando el archivo DOT
     system("dot -Tpng ../Graficas/activosUsuario.txt -o ../Graficas/activosUsuario.png");
 }
 

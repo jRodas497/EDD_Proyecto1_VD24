@@ -9,7 +9,6 @@
 class NodoTransaccion {
 public:
     NodoTransaccion(Transaccion* transaccion);
-    void insertarAlFinal(Transaccion* transaccion);
 
     // getters
     NodoTransaccion* getSig();

@@ -12,9 +12,7 @@ class Transaccion {
 public:
     Transaccion();
     Transaccion(Activo* idActivo, std::string nombreUsuario, std::string departamento, std::string empresa, std::string fecha, std::string dias, std::string accion);
-
-    std::string arreglar(std::string id);
-
+    
     // getters
     std::string getId();
     Activo* getIdActivo();

@@ -93,9 +93,3 @@ Los reportes que el usuario administrador podrá generar son:
 - Fecha de Entrega y Calificación: Jueves 16 de diciembre antes de medianoche.
 - Entrega en plataforma UEDI.
 - Copias tendrán nota de 0 puntos y serán reportadas al catedrático y a la escuela de sistemas.
-## Documentación
-
-- [ASDASD](https://linktodocumentation)
-- [QWERTY](https://linktodocumentation)
-- [UIOP](https://linktodocumentation)
-

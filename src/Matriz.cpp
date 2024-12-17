@@ -719,6 +719,7 @@ void Matriz::reporteActivosDepto(const std::string& depto) {
     }
     NodoMatriz* aux = deptoNodo->getAbajo();
     NodoMatriz* aux2;
+
     while (aux != nullptr) {
         aux2 = aux;
         while (aux2 != nullptr) {
@@ -835,6 +836,7 @@ NodoAVL* Matriz::listadoActivos(Usuario* usuario, bool bandera, std::string id) 
         return listadoActivos(usuario, inicial->getAbajo(), bandera, id);
     }
 }
+
 // Lista los activos de un usuario [Recursivo]
 NodoAVL* Matriz::listadoActivos(Usuario* usuario, NodoMatriz* start, bool bandera, std::string id) {
     NodoMatriz* aux = start;
